@@ -7,8 +7,8 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <button ion-button (click)="increment()">This is Var1: {{var1}}</button>
+  <button ion-button (click)="goToAbout()">Go to About Page</button>
+
+  <button ion-button *ngFor="let item of arr">{{item.value}}</button>
 </ion-content>
