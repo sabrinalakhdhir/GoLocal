@@ -9,6 +9,9 @@
 <ion-content padding>
   <button ion-button (click)="increment()">This is Var1: {{var1}}</button>
   <button ion-button (click)="goToAbout()">Go to About Page</button>
+  <button ion-button (click)="goToProfile()">Go to Profile Page</button>
+  <button ion-button (click)="createAccountModal()">Create an Account</button>
+  <button ion-button (click)="loginModal()">Log In </button>
 
   <button ion-button *ngFor="let item of arr">{{item.value}}</button>
 </ion-content>
