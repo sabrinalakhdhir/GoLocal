@@ -1,17 +1,34 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  <button ion-button (click)="increment()">This is Var1: {{var1}}</button>
-  <button ion-button (click)="goToAbout()">Go to About Page</button>
-  <button ion-button (click)="goToProfile()">Go to Profile Page</button>
-  <button ion-button (click)="createAccountModal()">Create an Account</button>
-  <button ion-button (click)="loginModal()">Log In </button>
-
-  <button ion-button *ngFor="let item of arr">{{item.value}}</button>
-</ion-content>
+    <ion-navbar>
+      <ion-row>
+        <ion-col col-4 text-left><ion-title>GoLocal</ion-title></ion-col>
+        <ion-col col-4></ion-col>
+        <ion-col col-4 text-right><ion-title>User</ion-title></ion-col>
+      </ion-row>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <ion-row class="category-row">
+  
+        <ion-row class="category">
+          <ion-col col-12>
+              <ion-title>Category Name</ion-title>
+          </ion-col>
+        </ion-row>
+        <ion-row class="activity-row">
+      
+            <div class="activity-container" *ngFor="let activity of activities" (click)="goToActivity()">
+              <ion-row class="activity-header">{{activity.image}}</ion-row>
+              <ion-row class="activity-footer">
+                <p><span text-left>{{activity.title}}</span><span text-right>${{activity.price}}</span></p>
+                <p>{{activity.description}}</p>
+              </ion-row>
+            </div>
+      
+        </ion-row>
+        
+    </ion-row>
+    
+  </ion-content>
+  

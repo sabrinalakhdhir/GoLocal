@@ -3,21 +3,22 @@ import { NavController, ModalController, NavParams } from 'ionic-angular';
 
 import { AboutPage } from '../about/about';
 import { ProfilePage } from '../profile/profile';
+import { ActivityPage } from '../activity/activity';
 import { CreateAccountPage } from '../createAccount/createAccount';
 import { LoginPage } from '../login/login';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  private var1 = 1;
-  private arr = [
-    { value: 1 },
-    { value: 2 },
-    { value: 3 }
+  private activities = [
+    { image: 1, title: 'Activity #', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
+    { image: 2, title: 'Activity #', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
+    { image: 3, title: 'Activity #', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
+    { image: 4, title: 'Activity #', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
   ];
-
   constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
 
   }
@@ -32,16 +33,13 @@ export class HomePage {
     existingAccountModal.present()
 
   }
-  goToAbout() {
-    this.navCtrl.setRoot(AboutPage);
+  goToActivity() {
+    this.navCtrl.push(ActivityPage);
   }
 
   goToProfile() {
-    this.navCtrl.setRoot(ProfilePage);
+    this.navCtrl.push(ProfilePage);
   }
 
-  increment() {
-    this.var1++;
-  }
 
 }

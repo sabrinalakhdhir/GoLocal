@@ -1,3 +1,23 @@
 page-home {
+    & .category {
+        margin-top: 20px;
+    }
 
+    & .activity-container {
+        margin: 10px;
+        width: 250px;
+
+        border: 3px solid black;
+        border-radius: 10px;
+
+        & .activity-header {
+            height: 200px;
+        }
+
+        & .activity-footer {
+            padding: 10px;
+            background-color: grey;
+        }
+    }
 }
+

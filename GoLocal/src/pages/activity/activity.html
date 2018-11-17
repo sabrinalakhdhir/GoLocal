@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <ion-row>
+      <ion-col col-4 text-left><ion-title>GoLocal</ion-title></ion-col>
+      <ion-col col-4></ion-col>
+      <ion-col col-4 text-right><ion-title>User</ion-title></ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row>
+
+    <ion-col col-1></ion-col>
+
+    <ion-col col-7 class="activity-details">
+      <ion-row class="image-row">
+        <ion-col col-4 class="image-container"></ion-col>
+        <ion-col col-4 class="image-container"></ion-col>
+        <ion-col col-4 class="image-container"></ion-col>
+      </ion-row>
+      <ion-row class="title">
+        <ion-col col-8><ion-title>{{activity.title}}</ion-title></ion-col>
+        <ion-col col-4><ion-title>$ {{activity.price}}</ion-title></ion-col>
+      </ion-row>
+
+      <ion-row>
+        <p>{{activity.description}}</p>
+      </ion-row>
+    </ion-col>
+
+    <ion-col col-3 class="guide-sidebar">
+      <ion-row><div class="guide-image"></div></ion-row>
+      <ion-row><div class="guide-name">{{guide.name}}</div></ion-row>
+      <ion-row><div class="guide-subtitle">{{guide.subtitle}}</div></ion-row>
+      <ion-row><div class="guide-contact">{{guide.contact}}</div></ion-row>
+      <ion-row>
+        <p>Start Date</p>
+        <ion-select [(ngModel)]="start-month" interface="popover" placeholder="month">
+          <ion-option *ngFor="let val of months" value="{{val}}">{{val}}</ion-option>
+        </ion-select>
+        <ion-select [(ngModel)]="start-day" interface="popover" placeholder="day">
+          <ion-option *ngFor="let val of days" value="{{val}}">{{val}}</ion-option>
+        </ion-select>
+      </ion-row>
+      <ion-row>
+        <p>End Date</p>
+        <ion-select [(ngModel)]="end-month" interface="popover" placeholder="month">
+          <ion-option *ngFor="let val of months" value="{{val}}">{{val}}</ion-option>
+        </ion-select>
+        <ion-select [(ngModel)]="end-day" interface="popover" placeholder="day">
+          <ion-option *ngFor="let val of days" value="{{val}}">{{val}}</ion-option>
+        </ion-select>
+      </ion-row>
+
+      <ion-row>
+        <button ion-button>Book Now</button>
+      </ion-row>
+    </ion-col>
+
+    <ion-col col-1></ion-col>
+
+  </ion-row>
+      
+
+  
+</ion-content>
