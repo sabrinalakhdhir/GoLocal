@@ -1,0 +1,48 @@
+page-payment {
+
+    & .activity-details {
+        padding: 0px 20px;
+    }
+
+    & .image-container {
+        padding: 10px;
+        height: 250px;
+        border: 3px solid black;
+        border-radius: 10px;
+    }
+
+    & .activity-info {
+
+        padding: 20px;
+        border: 3px solid black;
+
+        & .activity-image {
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px;
+            width: 200px;
+            height: 200px;
+            background-color: grey;
+            border-radius: 100px;
+        }
+
+        & .activity-title, .activity-date, .activity-time, .activity-price, .activity-guide {
+            width: 100%;
+            text-align: center;
+        }
+
+        & .activity-name {
+            font-size: 2em;
+        }
+
+        & .activity-subtitle {
+            font-size: 1.2em;
+        }
+
+        & .activity-contact {
+            font-style: italic;
+        }
+
+
+    }
+}

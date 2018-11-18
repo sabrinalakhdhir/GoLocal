@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-navbar>
+    <ion-row>
+      <ion-col col-4 text-left><ion-title>GoLocal</ion-title></ion-col>
+      <ion-col col-4></ion-col>
+      <ion-col col-4 text-right><ion-title>User</ion-title></ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row>
+
+    <ion-col col-1></ion-col>
+
+    <ion-col col-7 class="activity-details">
+      <ion-row class="title">
+        <ion-title>Billing Information</ion-title>
+      </ion-row>
+      <form>
+          <ion-item>
+            <ion-label>Name</ion-label>
+            <ion-input type="text" [(ngModel)]="billing.name" name="name"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Address</ion-label>
+            <ion-input type="text" [(ngModel)]="billing.address" name="adress"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>City</ion-label>
+            <ion-input type="text" [(ngModel)]="billing.city" name="city"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Province</ion-label>
+            <ion-input type="text" [(ngModel)]="billing.province" name="province"></ion-input>
+          </ion-item>
+      </form>
+      <ion-row class="title">
+          <ion-title>Payment Information</ion-title>
+        </ion-row>
+        <form>
+            <ion-item>
+              <ion-label>Name</ion-label>
+              <ion-input type="text" [(ngModel)]="payment.name" name="name"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Payment Type</ion-label>
+              <ion-select [(ngModel)]="payment.type" interface="popover" placeholder="Credit card" name="type">
+                <ion-option value="1">Visa</ion-option>
+                <ion-option value="2">MasterCard</ion-option>
+                <ion-option value="3">American Express</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Credit Card Number</ion-label>
+              <ion-input type="text" [(ngModel)]="payment.number" name="number"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Expiration Date</ion-label>
+              <ion-select [(ngModel)]="expiration-month" interface="popover" placeholder="month" name="expiration-month">
+                <ion-option *ngFor="let val of months" value="{{val}}">{{val}}</ion-option>
+              </ion-select>
+              <ion-select [(ngModel)]="expiration-date" interface="popover" placeholder="date" name="expiration-date">
+                <ion-option *ngFor="let val of days" value="{{val}}">{{val}}</ion-option>
+              </ion-select>
+            </ion-item>
+        </form>
+
+    </ion-col>
+
+    <ion-col col-3 class="activity-sidebar">
+      <div class="activity-info">
+        <ion-row><div class="activity-image"></div></ion-row>
+        <ion-row><div class="activity-title">{{activity.title}}</div></ion-row>
+        <ion-row><div class="activity-date">{{activity.date}}</div></ion-row>
+        <ion-row><div class="activity-time">{{activity.time}}</div></ion-row>
+        <ion-row><div class="activity-price">${{activity.price}}</div></ion-row>
+        <ion-row><div class="activity-guide">{{activity.guide}}</div></ion-row>
+      </div>
+      
+
+      <ion-row>
+        <ion-col col-6><button ion-button>Cancel</button></ion-col>
+        <ion-col col-6><button ion-button>Confirm</button></ion-col>
+      </ion-row>
+    </ion-col>
+
+    <ion-col col-1></ion-col>
+
+  </ion-row>
+      
+
+  
+</ion-content>
