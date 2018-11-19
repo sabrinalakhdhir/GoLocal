@@ -23,12 +23,12 @@ export class HomePage {
   }
 
   createAccountModal() {
-    let createNewModal = this.modalCtrl.create(CreateAccountPage, { userId: 123456});
+    let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name});
     createNewModal.present()
   }
 
   loginModal() {
-    let existingAccountModal = this.modalCtrl.create(LoginPage, { userId: 123456});
+    let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
     existingAccountModal.present()
 
   }

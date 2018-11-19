@@ -1,18 +1,27 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      <img src="../../assets/imgs/logo.png">
-    </ion-title>
+    <button ion-button clear (click)="backToHome()"><img width="250" height="100" src="../../assets/imgs/GoLocalLogo.png"></button>
+    <button ion-button clear (click)="backToHome()"> My Profile</button>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <p>First item</p>
-    </ion-item>
-    <ion-item>
-      <p>Second item</p>
-    </ion-item>
-  </ion-list>
-</ion-content>
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+          Column 1 of 2 <br>
+          Will Contain: <br>
+          - profile picture <br>
+          - description <br>
+          </ion-col>
+          <ion-col>
+          Column 2 of 2 <br>
+          Will Contain: <br>
+          - interests <br>
+          - current bookings <br> 
+          - past bookings <br>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  </ion-content>
+
