@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, ModalController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
+import { CreateAccountPage } from '../createAccount/createAccount'
 
 @Component({
   selector: 'page-login',
@@ -9,7 +10,7 @@ import { HomePage } from '../home/home';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, params: NavParams) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, params: NavParams) {
     console.log('username', params.get('username'));
   }
 
@@ -17,5 +18,9 @@ export class LoginPage {
     this.navCtrl.setRoot(HomePage);
   }
 
+  createAccountModal() {
+    let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name});
+    createNewModal.present()
+  }
 }
 
