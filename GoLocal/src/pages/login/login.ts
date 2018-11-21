@@ -10,16 +10,29 @@ import { CreateAccountPage } from '../createAccount/createAccount'
 })
 export class LoginPage {
 
+  private user = {
+    username: "",
+    password: "",
+    profile: ""
+  }
+
+
+  private loggedIn: Boolean = false;
+  private username = "";
+  private password = "";
+
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, params: NavParams) {
     console.log('username', params.get('username'));
   }
 
   login() {
-    this.navCtrl.setRoot(HomePage);
+    console.log("Clicked log in");
+    console.log(this.username,this.password);
+    // this.navCtrl.setRoot(HomePage);
   }
 
   createAccountModal() {
-    let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name});
+    let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name });
     createNewModal.present()
   }
 }
