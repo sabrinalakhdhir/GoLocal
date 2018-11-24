@@ -13,6 +13,20 @@ import { CreateAccountPage } from '../pages/createAccount/createAccount';
 import { LoginPage } from '../pages/login/login';
 import { PaymentPage } from '../pages/payment/payment'
 
+import { HttpModule } from '@angular/http';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+import { FirebaseProvider } from './../providers/firebase';
+ 
+const firebaseConfig = {
+    apiKey: "AIzaSyDb7Ifl2bypRHfuIHFEkgKXh4XaO9qnMYI",
+    authDomain: "golocal-5d48e.firebaseapp.com",
+    databaseURL: "https://golocal-5d48e.firebaseio.com",
+    projectId: "golocal-5d48e",
+    storageBucket: "golocal-5d48e.appspot.com",
+    messagingSenderId: "423914306295"
+  };
+
 @NgModule({
   declarations: [
     MyApp,
@@ -26,6 +40,8 @@ import { PaymentPage } from '../pages/payment/payment'
   ],
   imports: [
     BrowserModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -42,7 +58,8 @@ import { PaymentPage } from '../pages/payment/payment'
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    FirebaseProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}
