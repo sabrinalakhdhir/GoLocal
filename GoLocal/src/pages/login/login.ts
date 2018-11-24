@@ -28,11 +28,12 @@ export class LoginPage {
   login() {
     console.log("Clicked log in");
     console.log(this.username,this.password);
-    // this.navCtrl.setRoot(HomePage);
+    this.loggedIn = true;
+    this.navCtrl.setRoot(HomePage);
   }
 
   createAccountModal() {
-    let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name });
+    let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: this.username, password: this.password });
     createNewModal.present()
   }
 }
