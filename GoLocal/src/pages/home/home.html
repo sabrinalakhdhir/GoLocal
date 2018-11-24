@@ -1,34 +1,67 @@
 <ion-header>
-    <ion-navbar>
-      <ion-row>
-        <ion-col col-4 text-left><ion-title>GoLocal</ion-title></ion-col>
-        <ion-col col-4></ion-col>
-        <ion-col col-4 text-right><button ion-button clear (click)="loginModal()"> User</button></ion-col>
-      </ion-row>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <ion-row class="category-row">
-  
-        <ion-row class="category">
-          <ion-col col-12>
-              <ion-title>Category Name</ion-title>
-          </ion-col>
-        </ion-row>
-        <ion-row class="activity-row">
-      
-            <div class="activity-container" *ngFor="let activity of activities" (click)="goToActivity()">
-              <ion-row class="activity-header">{{activity.image}}</ion-row>
-              <ion-row class="activity-footer">
-                <p><span text-left>{{activity.title}}</span><span text-right>${{activity.price}}</span></p>
-                <p>{{activity.description}}</p>
-              </ion-row>
-            </div>
-      
-        </ion-row>
-        
+  <ion-navbar>
+    <ion-row>
+      <ion-col col-4 text-left>
+        <ion-title class = "logo">
+          <img src= "assets/imgs/GoLocalLogo.png"/>
+        </ion-title></ion-col>
+      <ion-col col-4></ion-col>
+      <ion-col col-4 text-right>
+        <ion-title>User</ion-title>
+      </ion-col>
     </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides>
+    <ion-slide>
+      <img class = "cover" src= "assets/imgs/cover.jpg"/>
+      <img class = "cover-logo" src = "assets/imgs/GoLocalLogo.png"/>
+    </ion-slide>
+    <ion-slide>
+      <img class = "cover" src= "assets/imgs/cover.jpg"/>
+      <img class = "cover-logo" src = "assets/imgs/GoLocalLogo.png"/>
+    </ion-slide>
+  </ion-slides>
+  <div class = "heading">
+    <h1>Featured</h1>
+  </div>
+  <ion-row class="category-row">
+
+      <ion-row class="activity-row">
     
-  </ion-content>
-  
+          <div class="activity-container" *ngFor="let activity of activities" (click)="goToActivity()">
+            <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
+            <ion-row class="activity-footer">
+              <ion-item class="line">
+                {{activity.title}} <span item-end class="activity-price">${{activity.price}} CAD</span>
+              </ion-item>
+              <p>{{activity.description}}</p>
+            </ion-row>
+          </div>
+    
+      </ion-row>
+      
+  </ion-row>
+
+  <div class = "heading">
+    <h1>Popular</h1>
+  </div>
+  <ion-row class="category-row">
+
+      <ion-row class="activity-row">
+    
+          <div class="activity-container" *ngFor="let activity of activities" (click)="goToActivity()">
+            <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
+            <ion-row class="activity-footer">
+              <ion-item class="line">
+                {{activity.title}} <span item-end class="activity-price">${{activity.price}} CAD</span>
+              </ion-item>
+              <p>{{activity.description}}</p>
+            </ion-row>
+          </div>
+    
+      </ion-row>
+      
+  </ion-row>
