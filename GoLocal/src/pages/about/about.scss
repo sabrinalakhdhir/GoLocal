@@ -1,3 +1,57 @@
 page-about {
 
+    & .logo { 
+    width: 200px;
+    height: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    }
+
+    & .about { 
+    position: relative;
+    right: 110px;
+    bottom: 15px;
+    }
+
+    & .user { 
+    position: relative;
+    right: 20px;
+    top: 10px;
+    }
+
+    & .cover {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    & .cover-logo {
+    	position: relative;
+    	width: 90%;
+        right: 10%;
+        bottom: 10%;
+    	margin-left: auto;
+    	margin-right: auto;
+
+        padding-bottom: 0px;
+    }
+
+    & .text{
+    	padding-top: 100px;
+    	padding-left: 100px;
+    	padding-right: 700px;
+
+	    & .title {
+	    	font-size: 50px!important;
+	    }
+
+	    & .description {
+	    	font-size: 16px!important;
+	    }
+
+	}
+
 }

@@ -32,9 +32,9 @@ export class ActivityPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, public fbProvider: FirebaseProvider) {
-      navParams.get('activity').then( data => {
+      /**navParams.get('activity').then( data => {
         this.activity = data;
-      })
+      })*/
   }
 
   createAccountModal() {
