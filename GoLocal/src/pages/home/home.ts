@@ -14,11 +14,10 @@ import { LoginPage } from '../login/login';
   templateUrl: 'home.html'
 })
 
-
-
 export class HomePage {
 
   @ViewChild('slides') slides: Slides;
+  logInButton = "Create Account/Log In";
 
   private activities = [
     { image: "assets/imgs/1.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
@@ -28,7 +27,8 @@ export class HomePage {
     { image: "assets/imgs/5.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
     { image: "assets/imgs/GoLocalLogo.png", title: 'Activity', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
   ];
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams) {
+    this.logInButton = navParams.get('data');
 
   }
 
@@ -58,3 +58,4 @@ export class HomePage {
     this.slides.slidePrev();
   }
 }
+export var logInButton;
