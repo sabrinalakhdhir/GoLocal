@@ -16,11 +16,10 @@ import { LoginPage } from '../login/login';
   templateUrl: 'home.html'
 })
 
-
-
 export class HomePage {
 
   @ViewChild('slides') slides: Slides;
+  logInButton = "Create Account/Log In";
 
   private activities = [
     { image: "assets/imgs/1.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
@@ -33,8 +32,9 @@ export class HomePage {
 
   private testList;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
     this.testList = this.fbProvider.getActivities();
+    this.logInButton = navParams.get('data');
   }
 
   createAccountModal() {
@@ -77,3 +77,5 @@ export class HomePage {
     this.fbProvider.addItem(title,description,price,guide);
   }
 }
+
+export var logInButton;

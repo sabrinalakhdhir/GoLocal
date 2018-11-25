@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
-import { CreateAccountPage } from '../createAccount/createAccount'
+import { CreateAccountPage } from '../createAccount/createAccount';
+
+import { logInButton } from '../home/home';
 
 @Component({
   selector: 'page-login',
@@ -22,14 +24,15 @@ export class LoginPage {
   private password = "";
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, params: NavParams) {
-    console.log('username', params.get('username'));
+  
   }
 
   login() {
     console.log("Clicked log in");
     console.log(this.username,this.password);
     this.loggedIn = true;
-    this.navCtrl.setRoot(HomePage);
+    let logInButton = "My Profile";
+    this.navCtrl.setRoot(HomePage, {data: logInButton});
   }
 
   createAccountModal() {
