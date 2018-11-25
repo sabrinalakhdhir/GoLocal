@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
 
+import { FirebaseProvider } from '../../providers/firebase';
+
 import { AboutPage } from '../about/about';
 import { ProfilePage } from '../profile/profile';
 import { CreateAccountPage } from '../createAccount/createAccount';
@@ -28,8 +30,11 @@ export class ActivityPage {
   private months = [1,2,3,4,5,6,7,8,9,10,11,12];
   private days = [1,2,3,4,5,6,7,8,9,10,11,12];
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public modalCtrl: ModalController, public fbProvider: FirebaseProvider) {
+      navParams.get('activity').then( data => {
+        this.activity = data;
+      })
   }
 
   createAccountModal() {
