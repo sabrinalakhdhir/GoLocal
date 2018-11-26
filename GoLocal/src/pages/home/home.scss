@@ -30,22 +30,25 @@ page-home {
     }
 
     & .logo { 
+    position: absolute;
     width: 200px;
     height: 50px;
     padding-top: 5px;
     padding-bottom: 5px;
+    top: -18px;
+    left: -30px;
     }
 
     & .about { 
-    position: relative;
-    right: 110px;
-    bottom: 15px;
+    position: absolute;
+    right: 250px;
+    top: -15px;
     }
 
     & .user { 
-    position: relative;
+    position: absolute;
     right: 20px;
-    top: 10px;
+    top: -15px;
     }
 
     & .activity-row {

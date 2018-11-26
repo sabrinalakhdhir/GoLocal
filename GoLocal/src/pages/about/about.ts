@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { FirebaseProvider } from '../../providers/firebase';
 
@@ -8,7 +8,7 @@ import { ProfilePage } from '../profile/profile';
 import { ActivityPage } from '../activity/activity';
 import { CreateAccountPage } from '../createAccount/createAccount';
 import { LoginPage } from '../login/login';
-
+import { AboutPage } from '../about/about';
 /**
  * Generated class for the AboutPage page.
  *
@@ -23,7 +23,7 @@ import { LoginPage } from '../login/login';
 })
 export class AboutPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -32,6 +32,16 @@ export class AboutPage {
 
   goToHome() {
     this.navCtrl.push(HomePage);
+  }
+
+  goToAbout() {
+    this.navCtrl.push(AboutPage);
+  }
+
+  loginModal() {
+    let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
+    existingAccountModal.present()
+
   }
 
 }

@@ -5,6 +5,7 @@ import { Slides } from 'ionic-angular';
 
 import { FirebaseProvider } from '../../providers/firebase';
 
+import { HomePage } from '../home/home';
 import { AboutPage } from '../about/about';
 import { ProfilePage } from '../profile/profile';
 import { ActivityPage } from '../activity/activity';
@@ -46,6 +47,10 @@ export class HomePage {
     let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
     existingAccountModal.present()
 
+  }
+
+  goToHome() {
+    this.navCtrl.push(HomePage);
   }
 
   goToAbout() {
