@@ -51,7 +51,7 @@ export class FirebaseProvider {
         price: price,
         guide: guide
     }
-    this.afd.list(ID).update(activity);
+    this.afd.object('/activities/'+ID).update(activity);
   }
 
   bookActivity(ID,traveller) {

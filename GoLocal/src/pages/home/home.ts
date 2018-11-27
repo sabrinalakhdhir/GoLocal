@@ -48,7 +48,7 @@ export class HomePage {
 
   }
   goToActivity() {
-    this.navCtrl.push(ActivityPage);
+    this.navCtrl.push(ActivityPage, { activity_ID: "" });
   }
 
   goToProfile() {

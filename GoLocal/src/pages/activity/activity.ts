@@ -8,6 +8,7 @@ import { ProfilePage } from '../profile/profile';
 import { CreateAccountPage } from '../createAccount/createAccount';
 import { LoginPage } from '../login/login';
 import { PaymentPage } from '../payment/payment';
+import { isString } from 'ionic-angular/util/util';
 
 @Component({
   selector: 'page-activity',
@@ -21,10 +22,15 @@ export class ActivityPage {
   // To check if new activity or editing existing one
   private newActivity = true;
 
+  // To check if an element is being edited
+  private editingTitle = false;
+  private editingPrice = false;
+  private editingDescription = false;
+
   // Elements of an activity
-  private title = "";
+  private title = "Activity Title";
   private price = 0;
-  private description = "";
+  private description = "Describe the activity in more detail";
 
   private guide = 0;
 
@@ -62,23 +68,47 @@ export class ActivityPage {
     existingAccountModal.present()
   }
 
-  onBook() {
-    this.navCtrl.setRoot(PaymentPage);
-  }
+  // onBook() {
+  //   this.navCtrl.setRoot(PaymentPage);
+  // }
 
   goToProfile() {
     this.navCtrl.setRoot(ProfilePage);
   }
 
-  onSave() {
+  // Edit functions
+  editImages() {}
+
+  editTitle() {
+    this.editingTitle = true;
+  }
+
+  editPrice() {
+    this.editingPrice = true;
+  }
+
+  editDescription() {
+    this.editingPrice = true;
+  }
+
+  // Save changes to activity or add new one
+  onBook() {
     console.log("logo clicked");
-    this.navParams.get('activity_ID').then( ID => {
-      if (ID) {
-        this.fbProvider.updateActivity(ID,this.title,this.description,this.price,this.guide);
-      } else {
-        this.fbProvider.addActivity(this.title,this.description,this.price,this.guide)
-      }
-    })
+    // Convert price to integer since it is string from ion-input
+    if (isString(this.price)) {
+      this.price = parseInt(this.price);
+    }
+    // If existing activity was clicked it will pass it forward
+    // If adding new activity there will be no ID
+    let ID = this.navParams.get('activity_ID');
+    if (ID != "") {
+      console.log("Updating activity");
+      this.fbProvider.updateActivity(ID,this.title,this.description,this.price,this.guide);
+    } else {
+      console.log("Adding new activity");
+      this.fbProvider.addActivity(this.title,this.description,this.price,this.guide)
+    }
+
   }
 
 }

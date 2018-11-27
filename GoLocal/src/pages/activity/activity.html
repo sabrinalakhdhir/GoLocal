@@ -13,7 +13,7 @@
   <ion-row>
 
     <ion-col col-1>
-      <button ion-button *ngIf="isGuide" (click)="onSave()"><ion-icon name="save"></ion-icon>Save</button>
+      <button ion-button *ngIf="isGuide" (click)="onSave()"><ion-icon name="save"></ion-icon>Save Activity</button>
     </ion-col>
 
     <!-- Main Content -->
@@ -22,25 +22,25 @@
         <ion-col col-4 class="image-container"></ion-col>
         <ion-col col-4 class="image-container"></ion-col>
         <ion-col col-4 class="image-container"></ion-col>
-        <button ion-button *ngIf="isGuide" (click)="editImages()"><ion-icon name="create"></ion-icon></button>
+        <button ion-button *ngIf="isGuide" (click)="editImages()">Edit Images<ion-icon name="create"></ion-icon></button>
       </ion-row>
       <ion-row class="title">
         <ion-col col-8>
-          <ion-title *ngIf="!editTitle">{{activity.title}}</ion-title>
-          <ion-input *ngIf="editTitle" [(ngModel)]="title"></ion-input>
-          <button ion-button *ngIf="isGuide" (click)="editTitle()"><ion-icon name="create"></ion-icon></button>
+          <ion-title *ngIf="!editingTitle">{{activity.title}}</ion-title>
+          <ion-input *ngIf="editingTitle" [(ngModel)]="title"></ion-input>
+          <button ion-button *ngIf="isGuide" (click)="editTitle()"><ion-icon name="create"></ion-icon>Edit Title</button>
         </ion-col>
         <ion-col col-4>
-          <ion-title *ngIf="!editPrice">$ {{activity.price}}</ion-title>
-          <ion-input *ngIf="editPrice" [(ngModel)]="price"></ion-input>
-          <button ion-button *ngIf="isGuide" (click)="editPrice()"><ion-icon name="create"></ion-icon></button>
+          <ion-title *ngIf="!editingPrice">$ {{activity.price}}</ion-title>
+          <ion-input *ngIf="editingPrice" [(ngModel)]="price"></ion-input>
+          <button ion-button *ngIf="isGuide" (click)="editPrice()"><ion-icon name="create"></ion-icon>Edit Price</button>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <p *ngIf="!editDescription">{{activity.description}}</p>
-        <ion-textarea *ngIf="editDescription" [(ngModel)]="description"></ion-input>
-        <button ion-button *ngIf="isGuide" (click)="editDescription()"><ion-icon name="create"></ion-icon></button>
+        <p *ngIf="!editingDescription">{{activity.description}}</p>
+        <ion-textarea *ngIf="editingDescription" [(ngModel)]="description"></ion-textarea>
+        <button ion-button *ngIf="isGuide" (click)="editDescription()"><ion-icon name="create"></ion-icon>Edit Description</button>
       </ion-row>
     </ion-col>
 
