@@ -8,7 +8,7 @@ import { ProfilePage } from '../profile/profile';
 import { ActivityPage } from '../activity/activity';
 import { CreateAccountPage } from '../createAccount/createAccount';
 import { LoginPage } from '../login/login';
-import { AboutPage } from '../about/about';
+
 /**
  * Generated class for the AboutPage page.
  *

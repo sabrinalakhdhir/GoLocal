@@ -5,7 +5,7 @@ import { Slides } from 'ionic-angular';
 
 import { FirebaseProvider } from '../../providers/firebase';
 
-import { HomePage } from '../home/home';
+
 import { AboutPage } from '../about/about';
 import { ProfilePage } from '../profile/profile';
 import { ActivityPage } from '../activity/activity';

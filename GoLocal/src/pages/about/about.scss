@@ -43,7 +43,7 @@ page-about {
     }
 
     & .text{
-    	padding-top: 100px;
+    	padding-top: 50px;
     	padding-left: 100px;
     	padding-right: 700px;
 
@@ -52,9 +52,32 @@ page-about {
 	    }
 
 	    & .description {
+            padding-left: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
 	    	font-size: 16px!important;
 	    }
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+    /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
 
 	}
+
+    & .img1{
+        position: relative;
+
+        height: 30%;
+        width: auto;
+        left: 1300px;
+        bottom: 825px;
+        }
 
 }
