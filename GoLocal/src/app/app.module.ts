@@ -16,6 +16,7 @@ import { PaymentPage } from '../pages/payment/payment'
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FirebaseProvider } from './../providers/firebase';
  
 const firebaseConfig = {
@@ -40,6 +41,7 @@ const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot(MyApp)

@@ -6,6 +6,8 @@ import { CreateAccountPage } from '../createAccount/createAccount';
 
 import { logInButton } from '../home/home';
 
+import { FirebaseProvider } from '../../providers/firebase';
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -23,16 +25,15 @@ export class LoginPage {
   private username = "";
   private password = "";
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, params: NavParams) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, params: NavParams, public fbProvider: FirebaseProvider) {
   
   }
 
   login() {
     console.log("Clicked log in");
     console.log(this.username,this.password);
-    this.loggedIn = true;
+    this.fbProvider.logIn(this.navCtrl,this.username,this.password);
     let logInButton = "My Profile";
-    this.navCtrl.setRoot(HomePage, {data: logInButton});
   }
 
   createAccountModal() {

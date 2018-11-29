@@ -1,37 +1,56 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs-compat';
+
+import { HomePage } from '../pages/home/home';
  
 @Injectable()
 export class FirebaseProvider {
  
-  constructor(public afd: AngularFireDatabase) { }
+  constructor(public afs: AngularFirestore) { }
 
   //////// USERS /////////////////
 
-  addUser(username,password,userType) {
+  logIn(navCtrl,username,password) {
+    let user = {
+      username: username,
+      password: password
+    }
+ 
+    
+  }
+
+  addUser(navCtrl,username,password,userType) {
     let user = {
       username: username,
       password: password,
+      type: userType,
     }
-    if (userType == '1') {
-      this.afd.list('/user/guides').push(user);
-    } else {
-      this.afd.list('/user/travellers').push(user);
-    }
+
+    const ID = this.afs.createId();
+    this.afs.doc('/users/'+ID).set(user)
+        .then( data => {
+          console.log("User added");
+          navCtrl.setRoot(HomePage, {loggedIn: true, type: userType});
+        }, error => {
+          console.log(error);
+          alert("Could not create new acccount. Try again.");
+        });
+
   }
 
   removeUser(ID,userType) {
     if (userType == '1') {
-      this.afd.list('/user/guides').remove(ID);
+      this.afs.doc('/users/'+ID).delete();
     } else {
-      this.afd.list('/user/travellers').remove(ID);
+      this.afs.doc('/users/'+ID).delete();
     }
   }
  
   //////// ACTIVITIES ////////////
 
   getActivities() {
-    return this.afd.list('/activities/');
+    return this.afs.collection('/activities').valueChanges();
   }
  
   addActivity(title,description,price,guide) {
@@ -41,7 +60,8 @@ export class FirebaseProvider {
         price: price,
         guide: guide
     }
-    this.afd.list('/activities/').push(activity);
+    const ID = this.afs.createId();
+    this.afs.doc('/activities/'+ID).set(activity);
   }
 
   updateActivity(ID,title,description,price,guide) {
@@ -51,14 +71,14 @@ export class FirebaseProvider {
         price: price,
         guide: guide
     }
-    this.afd.object('/activities/'+ID).update(activity);
+    this.afs.doc('/activities/'+ID).update(activity);
   }
 
   bookActivity(ID,traveller) {
-    this.afd.list('/activities/'+ID).push(traveller);
+    this.afs.doc('/activities/'+ID+'/traveller').set(traveller);
   }
  
-  removeActivity(id) {
-    this.afd.list('/activities/').remove(id);
+  removeActivity(ID) {
+    this.afs.doc('/activities/'+ID).delete();
   }
 }

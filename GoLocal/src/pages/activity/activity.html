@@ -27,19 +27,19 @@
       <ion-row class="title">
         <ion-col col-8>
           <ion-title *ngIf="!editingTitle">{{activity.title}}</ion-title>
-          <ion-input *ngIf="editingTitle" [(ngModel)]="title"></ion-input>
+          <ion-input *ngIf="editingTitle" [(ngModel)]="activity.title"></ion-input>
           <button ion-button *ngIf="isGuide" (click)="editTitle()"><ion-icon name="create"></ion-icon>Edit Title</button>
         </ion-col>
         <ion-col col-4>
           <ion-title *ngIf="!editingPrice">$ {{activity.price}}</ion-title>
-          <ion-input *ngIf="editingPrice" [(ngModel)]="price"></ion-input>
+          <ion-input *ngIf="editingPrice" [(ngModel)]="activity.price"></ion-input>
           <button ion-button *ngIf="isGuide" (click)="editPrice()"><ion-icon name="create"></ion-icon>Edit Price</button>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <p *ngIf="!editingDescription">{{activity.description}}</p>
-        <ion-textarea *ngIf="editingDescription" [(ngModel)]="description"></ion-textarea>
+        <ion-textarea *ngIf="editingDescription" [(ngModel)]="activity.description"></ion-textarea>
         <button ion-button *ngIf="isGuide" (click)="editDescription()"><ion-icon name="create"></ion-icon>Edit Description</button>
       </ion-row>
     </ion-col>

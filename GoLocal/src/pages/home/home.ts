@@ -19,7 +19,7 @@ import { LoginPage } from '../login/login';
 export class HomePage {
 
   @ViewChild('slides') slides: Slides;
-  logInButton = "Create Account/Log In";
+  private logInButton = "Create Account/Log In";
 
   private activities = [
     { image: "assets/imgs/1.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
@@ -30,11 +30,17 @@ export class HomePage {
     { image: "assets/imgs/GoLocalLogo.png", title: 'Activity', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
   ];
 
+  private activitiesDB;
+
   private testList;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
     this.testList = this.fbProvider.getActivities();
-    this.logInButton = navParams.get('data');
+    let loggedIn = navParams.get('loggedIn');
+    if (loggedIn) {
+      logInButton = "My Profile";
+    }
+    this.activitiesDB = this.fbProvider.getActivities()
   }
 
   createAccountModal() {

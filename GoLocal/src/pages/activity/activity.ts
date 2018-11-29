@@ -27,12 +27,8 @@ export class ActivityPage {
   private editingPrice = false;
   private editingDescription = false;
 
-  // Elements of an activity
-  private title = "Activity Title";
-  private price = 0;
-  private description = "Describe the activity in more detail";
-
   private guide = 0;
+  private traveller = "";
 
   private activity = {
     title: "Activity Title",
@@ -91,22 +87,27 @@ export class ActivityPage {
     this.editingPrice = true;
   }
 
-  // Save changes to activity or add new one
   onBook() {
+    let ID = this.navParams.get('activity_ID');
+    this.fbProvider.bookActivity(ID,this.traveller);
+  }
+
+  // Save changes to activity or add new one (FOR GUIDES)
+  onSave() {
     console.log("logo clicked");
     // Convert price to integer since it is string from ion-input
-    if (isString(this.price)) {
-      this.price = parseInt(this.price);
+    if (isString(this.activity.price)) {
+      this.activity.price = parseInt(this.activity.price);
     }
     // If existing activity was clicked it will pass it forward
     // If adding new activity there will be no ID
     let ID = this.navParams.get('activity_ID');
     if (ID != "") {
       console.log("Updating activity");
-      this.fbProvider.updateActivity(ID,this.title,this.description,this.price,this.guide);
+      this.fbProvider.updateActivity(ID,this.activity.title,this.activity.description,this.activity.price,this.guide);
     } else {
       console.log("Adding new activity");
-      this.fbProvider.addActivity(this.title,this.description,this.price,this.guide)
+      this.fbProvider.addActivity(this.activity.title,this.activity.description,this.activity.price,this.guide)
     }
 
   }

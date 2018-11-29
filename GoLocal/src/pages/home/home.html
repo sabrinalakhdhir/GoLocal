@@ -31,7 +31,7 @@
 
       <ion-row class="activity-row">
     
-          <div class="activity-container" *ngFor="let activity of activities" (click)="goToActivity()">
+          <div class="activity-container" *ngFor="let activity of activitiesDB | async" (click)="goToActivity()">
             <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
             <ion-row class="activity-footer">
               <ion-item class="line">
