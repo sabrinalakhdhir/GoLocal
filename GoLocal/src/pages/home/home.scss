@@ -25,9 +25,11 @@ page-home {
     }
 
     & .heading {
-    	padding-left: 330px;
+    	padding-left: 450px;
     	padding-top: 30px;
     }
+
+
 
     & .logo { 
     position: absolute;
@@ -51,8 +53,13 @@ page-home {
     top: -15px;
     }
 
+    & .button-bar {
+    padding-left: 1025px;
+    padding-top: 30px;
+    }
+
     & .activity-row {
-    	padding-left: 325px;
+    	padding-left: 450px;
     	padding-right: 100px;
     	/*flex-wrap: nowrap;*/
 
