@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs-compat';
+// import { Observable, Subject } from 'rxjs-compat';
+// import { switchMap } from 'rxjs/operators';
 
 import { HomePage } from '../pages/home/home';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { AboutPage } from '../pages/about/about';
  
 @Injectable()
 export class FirebaseProvider {
@@ -11,12 +14,22 @@ export class FirebaseProvider {
 
   //////// USERS /////////////////
 
-  logIn(navCtrl,username,password) {
-    let user = {
-      username: username,
-      password: password
-    }
- 
+  logIn(navCtrl,username,password) { 
+    let query = this.afs.collection('users', 
+        ref => ref.where('username', '==', username)
+        .where('password', '==', password))
+        .valueChanges()
+        .subscribe( user => {
+          console.log(user[0]['type']);
+          if (user[0]['type'] == 1) {
+            console.log("Guide logged in. Going to dashboard");
+            navCtrl.setRoot(AboutPage);
+          } else {
+            navCtrl.setRoot(HomePage);
+          }
+        }, error => {
+          console.log("Could not log in. Try again");
+        })
     
   }
 
@@ -31,12 +44,15 @@ export class FirebaseProvider {
     this.afs.doc('/users/'+ID).set(user)
         .then( data => {
           console.log("User added");
-          navCtrl.setRoot(HomePage, {loggedIn: true, type: userType});
+          if (userType == 1) {
+            navCtrl.setRoot(HomePage);
+          } else {
+            navCtrl.setRoot(HomePage);
+          }
         }, error => {
           console.log(error);
           alert("Could not create new acccount. Try again.");
         });
-
   }
 
   removeUser(ID,userType) {

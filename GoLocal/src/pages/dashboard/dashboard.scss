@@ -1,0 +1,76 @@
+page-dashboard {
+    & .category {
+        margin-top: 20px;
+    }
+
+    & .cover {
+    	position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+    	height: 100%;
+    }
+
+    & .cover-logo {
+    	position: relative;
+    	width: 40%;
+    	margin-left: auto;
+    	margin-right: auto;
+
+    }
+
+    & .heading {
+    	padding-left: 225px;
+    	padding-top: 30px;
+    }
+
+    & .logo { 
+    width: 200px;
+    height: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    }
+
+    & .activity-row {
+    	padding-left: 225px;
+    	padding-right: 100px;
+    	/*flex-wrap: nowrap;*/
+
+    	& .activity-container {
+        	margin: 10px;
+        	width: 230px;
+
+        	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    	    border-radius: 10px;
+
+        	& .activity-header {
+
+            	height: 200px;
+            	border-bottom-left-radius: 1px;
+            	border-bottom-right-radius: 1px;
+            	border-top-left-radius: 8px;
+            	border-top-right-radius: 8px;
+            	overflow: hidden;
+
+
+        	}
+
+        	& .activity-footer {
+        		border-radius: 5px;
+            	padding: 10px;
+
+            	white-space: normal;
+
+            	& .line {
+            	background-color: transparent;
+            }
+        	}
+    	}
+    }
+
+    & .activity-container:hover {
+        background: linear-gradient(to bottom, white, gainsboro);
+
+    }
+}

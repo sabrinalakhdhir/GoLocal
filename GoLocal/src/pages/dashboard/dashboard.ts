@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { ViewChild } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
-import { Slides } from 'ionic-angular';
 
 import { FirebaseProvider } from '../../providers/firebase';
 
-import { DashboardPage } from '../dashboard/dashboard';
 import { AboutPage } from '../about/about';
 import { ProfilePage } from '../profile/profile';
 import { ActivityPage } from '../activity/activity';
@@ -13,13 +10,12 @@ import { CreateAccountPage } from '../createAccount/createAccount';
 import { LoginPage } from '../login/login';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-dashboard',
+  templateUrl: 'dashboard.html'
 })
 
-export class HomePage {
+export class DashboardPage {
 
-  @ViewChild('slides') slides: Slides;
   private logInButton = "Create Account/Log In";
 
   private activities = [
@@ -33,10 +29,7 @@ export class HomePage {
 
   private activitiesDB;
 
-  private testList;
-
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
-    this.testList = this.fbProvider.getActivities();
     let loggedIn = navParams.get('loggedIn');
     if (loggedIn) {
       logInButton = "My Profile";
@@ -55,23 +48,11 @@ export class HomePage {
 
   }
   goToActivity() {
-    this.navCtrl.push(DashboardPage, { activity_ID: "" });
+    this.navCtrl.push(ActivityPage, { activity_ID: "" });
   }
 
   goToProfile() {
     this.navCtrl.push(ProfilePage);
-  }
-
-  goToDashboard() {
-    this.navCtrl.push(DashboardPage);
-  }
-  
-  next() {
-    this.slides.slideNext();
-  }
-
-  prev() {
-    this.slides.slidePrev();
   }
 
 }
