@@ -58,7 +58,7 @@ export class HomePage {
   }
 
   goToActivity() {
-    this.navCtrl.push(ActivityPage);
+    this.navCtrl.push(ActivityPage, { activity_ID: "" });
   }
 
   goToProfile() {
@@ -73,13 +73,13 @@ export class HomePage {
     this.slides.slidePrev();
   }
 
-  addItem() {
+  addActivity() {
     console.log("logo clicked");
     let title = "Test title";
     let description = "Test description";
     let price = 99;
     let guide = 1;
-    this.fbProvider.addItem(title,description,price,guide);
+    this.fbProvider.addActivity(title,description,price,guide);
   }
 }
 
