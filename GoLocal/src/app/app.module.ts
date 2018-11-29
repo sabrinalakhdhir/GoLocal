@@ -4,6 +4,9 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { DirectivesModule } from '../directives/directives.module';
+import { ElasticHeaderDirective } from '../directives/elastic-header/elastic-header';
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AboutPage } from '../pages/about/about';
@@ -11,7 +14,7 @@ import { ActivityPage } from '../pages/activity/activity';
 import { ProfilePage } from '../pages/profile/profile';
 import { CreateAccountPage } from '../pages/createAccount/createAccount';
 import { LoginPage } from '../pages/login/login';
-import { PaymentPage } from '../pages/payment/payment'
+import { PaymentPage } from '../pages/payment/payment';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -36,7 +39,8 @@ const firebaseConfig = {
     ActivityPage,
     CreateAccountPage,
     LoginPage,
-    PaymentPage 
+    PaymentPage,
+    ElasticHeaderDirective 
   ],
   imports: [
     BrowserModule,

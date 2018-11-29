@@ -1,3 +1,83 @@
 page-about {
 
+    & .logo { 
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    top: -18px;
+    left: -30px;
+    }
+
+    & .about { 
+    position: absolute;
+    right: 250px;
+    top: -15px;
+    }
+
+    & .user { 
+    position: absolute;
+    right: 20px;
+    top: -15px;
+    }
+
+    & .cover {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    & .cover-logo {
+    	position: relative;
+    	width: 90%;
+        right: 10%;
+        bottom: 10%;
+    	margin-left: auto;
+    	margin-right: auto;
+
+        padding-bottom: 0px;
+    }
+
+    & .text{
+    	padding-top: 50px;
+    	padding-left: 100px;
+    	padding-right: 700px;
+
+	    & .title {
+	    	font-size: 50px!important;
+	    }
+
+	    & .description {
+            padding-left: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+	    	font-size: 16px!important;
+	    }
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+    /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+	}
+
+    & .img1{
+        position: relative;
+
+        height: 30%;
+        width: auto;
+        left: 1300px;
+        bottom: 825px;
+        }
+
 }
