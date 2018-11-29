@@ -35,6 +35,9 @@ export class HomePage {
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
     this.testList = this.fbProvider.getActivities();
     this.logInButton = navParams.get('data');
+    if (this.logInButton == "") {
+      this.logInButton = "Create Account/Log In";
+    }
   }
 
   createAccountModal() {
