@@ -23,7 +23,7 @@ export class FirebaseProvider {
           console.log(user[0]['type']);
           if (user[0]['type'] == 1) {
             console.log("Guide logged in. Going to dashboard");
-            navCtrl.setRoot(AboutPage);
+            navCtrl.setRoot(HomePage);
           } else {
             navCtrl.setRoot(HomePage);
           }
@@ -97,4 +97,29 @@ export class FirebaseProvider {
   removeActivity(ID) {
     this.afs.doc('/activities/'+ID).delete();
   }
+
+  //////// PROFILES ////////////
+
+  updateProfile(ID,type,interests,skills,bio) {
+    // let profile;
+    // if (type == 1) {
+    //   profile = {
+    //     skills: skills,
+    //     bio: bio
+    //   }
+    // } else {
+    //   profile = {
+    //     interests: interests,
+    //     bio: bio
+    //   }
+    // }
+    
+    let profile = {
+      interests: ["skiing","running","movies"],
+      bio: "This is a little bio about the user"
+    }
+
+    this.afs.doc('/users/'+ID).update(profile);
+  }
+
 }
