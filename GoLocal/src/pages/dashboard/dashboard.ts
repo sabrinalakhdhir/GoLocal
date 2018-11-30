@@ -63,12 +63,30 @@ export class DashboardPage {
     existingAccountModal.present()
   }
 
+  addActivity() {
+    const activity = {
+      id: null,
+      val: {
+        title: "Click edit button to change title",
+        price: 0,
+        description: "Click edit button to change description"
+      }
+    }
+    this.navCtrl.push(ActivityPage, {
+      userType: 1,
+      activity: activity
+    })
+  }
+
   goToActivity(activity) {
     this.navCtrl.push(ActivityPage, { userType: 1, activity: activity });
   }
 
   goToProfile() {
-    this.navCtrl.push(ProfilePage);
+    console.log("Profile clicked");
+    this.navCtrl.push(ProfilePage, {
+      myProfile: true
+    });
   }
 
 }

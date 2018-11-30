@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-// import { Observable, Subject } from 'rxjs-compat';
-// import { switchMap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs-compat';
+import { switchMap } from 'rxjs/operators';
 
 import { HomePage } from '../pages/home/home';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { AboutPage } from '../pages/about/about';
-import { NavController } from 'ionic-angular';
  
 @Injectable()
 export class FirebaseProvider {
@@ -15,28 +14,11 @@ export class FirebaseProvider {
 
   //////// USERS /////////////////
 
-  logIn(navCtrl,username,password) {
-    let type = null;
+  logIn(navCtrl,username,password) { 
     let query = this.afs.collection('users', 
         ref => ref.where('username', '==', username)
-        .where('password', '==', password))
-        .valueChanges()
-        // .subscribe( user => {
-        //   if (user.length > 0) {
-        //     if (user[0]['type'] == 1) {
-        //       console.log(user[0]['type']);
-        //       console.log("Guide logged in. Going to dashboard");
-        //       navCtrl.setRoot(DashboardPage);
-        //     } else {
-        //       navCtrl.setRoot(HomePage);
-        //     }
-        //   } else {
-        //     alert("Username/password did not match. Try again.")
-        //   }
-          
-        // }, error => {
-        //   console.log("Could not log in. Try again");
-        // })
+        .where('password', '==', password));
+        
     return query;
   }
 
@@ -107,26 +89,20 @@ export class FirebaseProvider {
 
   //////// PROFILES ////////////
 
-  updateProfile(ID,type,interests,skills,bio) {
-    // let profile;
-    // if (type == 1) {
-    //   profile = {
-    //     skills: skills,
-    //     bio: bio
-    //   }
-    // } else {
-    //   profile = {
-    //     interests: interests,
-    //     bio: bio
-    //   }
-    // }
-    
+  updateProfile(ID,type,name,bio) {
+
     let profile = {
-      interests: ["skiing","running","movies"],
-      bio: "This is a little bio about the user"
+      fullname: name,
+      bio: bio
     }
 
     this.afs.doc('/users/'+ID).update(profile);
+  }
+
+  getGuideInfo(ID) {
+    let query = this.afs.doc('/users/'+ID); 
+
+    return query.snapshotChanges();
   }
 
 }

@@ -42,6 +42,7 @@ export class HomePage {
     // Convert Firestore object to normal object
     this.activitiesDB.subscribe(actions => {
       actions.forEach(action => {
+        console.log(action);
         const value = action.payload.doc.data();
         const id = action.payload.doc.id;
         this.activitiesData.push({
@@ -72,7 +73,7 @@ export class HomePage {
     let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
     existingAccountModal.present()
   }
-
+  
   goToActivity(activity) {
     console.log("Activity clicked");
     console.log(activity);
@@ -85,14 +86,7 @@ export class HomePage {
   goToProfile() {
     console.log("Profile clicked");
     this.navCtrl.push(ProfilePage, {
-      loggedIn: this.loggedIn
-    });
-  }
-
-  goToDashboard() {
-    console.log("Dashboard clicked");
-    this.navCtrl.push(DashboardPage, {
-      loggedIn: this.loggedIn
+      myProfile: true
     });
   }
   

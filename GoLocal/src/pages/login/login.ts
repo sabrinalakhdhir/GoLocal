@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { HomePage } from '../home/home';
 import { DashboardPage } from '../dashboard/dashboard';
@@ -24,15 +25,31 @@ export class LoginPage {
   private username = "";
   private password = "";
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, params: NavParams, public fbProvider: FirebaseProvider) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,
+     params: NavParams, public fbProvider: FirebaseProvider, public storage: Storage) {
   
   }
 
   login() {
     console.log("Clicked log in");
     console.log(this.username,this.password);
-    this.fbProvider.logIn(this.navCtrl,this.username,this.password)
-      .subscribe( user => {
+    let userObject = this.fbProvider.logIn(this.navCtrl,this.username,this.password)
+
+    // Convert data to normal object and store in local storage
+    userObject.snapshotChanges().subscribe(actions => {
+      actions.forEach(action => {
+        console.log(action);
+        const value = action.payload.doc.data();
+        const id = action.payload.doc.id;
+        this.storage.set('user' ,{
+          id: id,
+          val: value
+        });
+      });
+    })
+
+    // Check value of queried user and route to appropriate page
+    userObject.valueChanges().subscribe( user => {
         if (user.length > 0) {
           if (user[0]['type'] == 1) {
             console.log(user[0]['type']);

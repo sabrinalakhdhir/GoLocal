@@ -24,6 +24,9 @@ export class CreateAccountPage {
   private password = "";
   private userType = 0;
 
+  private fullname = "";
+  private contact = "";
+
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, params: NavParams, public fbProvider: FirebaseProvider) {
 
     console.log('username', params.get('username'));
