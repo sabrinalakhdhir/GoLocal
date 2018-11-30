@@ -16,7 +16,10 @@ import { LoginPage } from '../login/login';
 
 export class DashboardPage {
 
-  private logInButton = "Create Account/Log In";
+  private loggedIn = true;
+  private logInButton = "Profile";
+
+  private username;
 
   private activities = [
     { image: "assets/imgs/1.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
@@ -28,13 +31,26 @@ export class DashboardPage {
   ];
 
   private activitiesDB;
+  private activitiesData = [];
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
-    let loggedIn = navParams.get('loggedIn');
-    if (loggedIn) {
-      logInButton = "My Profile";
-    }
-    this.activitiesDB = this.fbProvider.getActivities()
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,  public fbProvider: FirebaseProvider, public navParams: NavParams) {
+    this.username = this.navParams.get('name')
+    this.logInButton = this.username + "'s Profile";
+    
+    // Get list from Firestore
+    this.activitiesDB = this.fbProvider.getActivities();
+    // Convert Firestore object to normal object
+    this.activitiesDB.subscribe(actions => {
+      actions.forEach(action => {
+        const value = action.payload.doc.data();
+        const id = action.payload.doc.id;
+        this.activitiesData.push({
+          id: id,
+          val: value
+        });
+      });
+    })
+    console.log(this.activitiesData);
   }
 
   createAccountModal() {
@@ -45,10 +61,10 @@ export class DashboardPage {
   loginModal() {
     let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
     existingAccountModal.present()
-
   }
-  goToActivity() {
-    this.navCtrl.push(ActivityPage, { activity_ID: "" });
+
+  goToActivity(activity) {
+    this.navCtrl.push(ActivityPage, { userType: 1, activity: activity });
   }
 
   goToProfile() {

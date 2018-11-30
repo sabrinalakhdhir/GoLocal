@@ -18,7 +18,7 @@ import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { FirebaseProvider } from './../providers/firebase';
+import { FirebaseProvider } from '../providers/firebase';
  
 const firebaseConfig = {
     apiKey: "AIzaSyDb7Ifl2bypRHfuIHFEkgKXh4XaO9qnMYI",

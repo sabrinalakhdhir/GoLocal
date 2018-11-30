@@ -6,6 +6,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { HomePage } from '../pages/home/home';
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { AboutPage } from '../pages/about/about';
+import { NavController } from 'ionic-angular';
  
 @Injectable()
 export class FirebaseProvider {
@@ -14,23 +15,29 @@ export class FirebaseProvider {
 
   //////// USERS /////////////////
 
-  logIn(navCtrl,username,password) { 
+  logIn(navCtrl,username,password) {
+    let type = null;
     let query = this.afs.collection('users', 
         ref => ref.where('username', '==', username)
         .where('password', '==', password))
         .valueChanges()
-        .subscribe( user => {
-          console.log(user[0]['type']);
-          if (user[0]['type'] == 1) {
-            console.log("Guide logged in. Going to dashboard");
-            navCtrl.setRoot(HomePage);
-          } else {
-            navCtrl.setRoot(HomePage);
-          }
-        }, error => {
-          console.log("Could not log in. Try again");
-        })
-    
+        // .subscribe( user => {
+        //   if (user.length > 0) {
+        //     if (user[0]['type'] == 1) {
+        //       console.log(user[0]['type']);
+        //       console.log("Guide logged in. Going to dashboard");
+        //       navCtrl.setRoot(DashboardPage);
+        //     } else {
+        //       navCtrl.setRoot(HomePage);
+        //     }
+        //   } else {
+        //     alert("Username/password did not match. Try again.")
+        //   }
+          
+        // }, error => {
+        //   console.log("Could not log in. Try again");
+        // })
+    return query;
   }
 
   addUser(navCtrl,username,password,userType) {
@@ -66,7 +73,7 @@ export class FirebaseProvider {
   //////// ACTIVITIES ////////////
 
   getActivities() {
-    return this.afs.collection('/activities').valueChanges();
+    return this.afs.collection('/activities').snapshotChanges();
   }
  
   addActivity(title,description,price,guide) {

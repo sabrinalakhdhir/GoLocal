@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
+import { DashboardPage } from '../dashboard/dashboard';
 import { CreateAccountPage } from '../createAccount/createAccount';
 
 import { logInButton } from '../home/home';
@@ -20,8 +21,6 @@ export class LoginPage {
     profile: ""
   }
 
-
-  private loggedIn: Boolean = false;
   private username = "";
   private password = "";
 
@@ -32,8 +31,29 @@ export class LoginPage {
   login() {
     console.log("Clicked log in");
     console.log(this.username,this.password);
-    this.fbProvider.logIn(this.navCtrl,this.username,this.password);
-    let logInButton = "My Profile";
+    this.fbProvider.logIn(this.navCtrl,this.username,this.password)
+      .subscribe( user => {
+        if (user.length > 0) {
+          if (user[0]['type'] == 1) {
+            console.log(user[0]['type']);
+            console.log("Guide logged in. Going to dashboard");
+            this.navCtrl.setRoot(DashboardPage, {
+              loggedIn: true,
+              name: user[0]['username']
+            });
+          } else {
+            this.navCtrl.setRoot(HomePage, {
+              loggedIn: true,
+              name: user[0]['username']
+            });
+          }
+        } else {
+          alert("Username/password did not match. Try again.")
+        }
+      }, error => {
+        console.log("Could not log in. Try again");
+      })
+;
   }
 
   createAccountModal() {

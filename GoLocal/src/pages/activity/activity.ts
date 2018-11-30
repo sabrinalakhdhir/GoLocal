@@ -16,8 +16,10 @@ import { isString } from 'ionic-angular/util/util';
 })
 export class ActivityPage {
 
+  private loggedIn = false;
+  
   // To set edit mode if guide user
-  private isGuide = true;
+  private isGuide = false;
 
   // To check if new activity or editing existing one
   private newActivity = true;
@@ -30,6 +32,7 @@ export class ActivityPage {
   private guide = 0;
   private traveller = "";
 
+  private activity_ID = "";
   private activity = {
     title: "Activity Title",
     price: 100,
@@ -48,9 +51,20 @@ export class ActivityPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, public fbProvider: FirebaseProvider) {
-      // navParams.get('activity').then( data => {
-      //   this.activity = data;
-      // })
+      let activity = navParams.get('activity');
+      let userType = navParams.get('userType');
+      this.loggedIn = navParams.get('loggedIn');
+
+      console.log("Constructing activity");
+      if (userType == 1) {
+        this.isGuide = true;
+      } else {
+        this.isGuide = false;
+      }
+
+      this.activity_ID = activity.id;
+      this.activity = activity.val;
+
       for (var i=0; i<31; i++) { this.days.push(i); }
   }
 
@@ -87,9 +101,13 @@ export class ActivityPage {
     this.editingPrice = true;
   }
 
+  // When booking an activity
   onBook() {
-    let ID = this.navParams.get('activity_ID');
-    this.fbProvider.bookActivity(ID,this.traveller);
+    if (this.loggedIn) {
+      this.navCtrl.push(PaymentPage)
+    }
+    // let ID = this.navParams.get('activity').id;
+    // this.fbProvider.bookActivity(ID,this.traveller);
   }
 
   // Save changes to activity or add new one (FOR GUIDES)
@@ -101,7 +119,7 @@ export class ActivityPage {
     }
     // If existing activity was clicked it will pass it forward
     // If adding new activity there will be no ID
-    let ID = this.navParams.get('activity_ID');
+    let ID = this.activity_ID;
     if (ID != "") {
       console.log("Updating activity");
       this.fbProvider.updateActivity(ID,this.activity.title,this.activity.description,this.activity.price,this.guide);

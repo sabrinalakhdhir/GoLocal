@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 
 import { FirebaseProvider } from '../../providers/firebase';
+import { map } from 'rxjs/operators';
 
 import { DashboardPage } from '../dashboard/dashboard';
 import { AboutPage } from '../about/about';
@@ -20,6 +20,8 @@ import { LoginPage } from '../login/login';
 export class HomePage {
 
   @ViewChild('slides') slides: Slides;
+
+  private loggedIn = false;
   private logInButton = "Create Account/Log In";
 
   private activities = [
@@ -32,16 +34,33 @@ export class HomePage {
   ];
 
   private activitiesDB;
-
-  private testList;
+  private activitiesData = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
-    this.testList = this.fbProvider.getActivities();
-    let loggedIn = navParams.get('loggedIn');
+    // Get list from Firestore
+    this.activitiesDB = this.fbProvider.getActivities();
+    // Convert Firestore object to normal object
+    this.activitiesDB.subscribe(actions => {
+      actions.forEach(action => {
+        const value = action.payload.doc.data();
+        const id = action.payload.doc.id;
+        this.activitiesData.push({
+          id: id,
+          val: value
+        });
+      });
+    })
+    console.log(this.activitiesData);
+  }
+
+  ionViewDidEnter() {
+    console.log("Home entered");
+    let loggedIn = this.navParams.get('loggedIn');
+    let name = this.navParams.get('name');
     if (loggedIn) {
-      logInButton = "My Profile";
+      this.loggedIn = true;
+      this.logInButton = name + "'s Profile";
     }
-    this.activitiesDB = this.fbProvider.getActivities()
   }
 
   createAccountModal() {
@@ -52,18 +71,29 @@ export class HomePage {
   loginModal() {
     let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
     existingAccountModal.present()
-
   }
-  goToActivity() {
-    this.navCtrl.push(DashboardPage, { activity_ID: "" });
+
+  goToActivity(activity) {
+    console.log("Activity clicked");
+    console.log(activity);
+    this.navCtrl.push(ActivityPage, {
+      loggedIn: this.loggedIn,
+      userType: 0, 
+      activity: activity });
   }
 
   goToProfile() {
-    this.navCtrl.push(ProfilePage);
+    console.log("Profile clicked");
+    this.navCtrl.push(ProfilePage, {
+      loggedIn: this.loggedIn
+    });
   }
 
   goToDashboard() {
-    this.navCtrl.push(DashboardPage);
+    console.log("Dashboard clicked");
+    this.navCtrl.push(DashboardPage, {
+      loggedIn: this.loggedIn
+    });
   }
   
   next() {
