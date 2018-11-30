@@ -16,12 +16,11 @@ import { isString } from 'ionic-angular/util/util';
 })
 export class ProfilePage {
 
-  private guide = 0;
+  private user = 0;
 
-  private guideData = {
+  private userData = {
     name: "Rocky Climber",
-    subtitle: "The bestest boulderer around",
-    contact: "rocky@climbeverything.com"
+    image: ""
   }
   constructor(public navCtrl: NavController) {
   }

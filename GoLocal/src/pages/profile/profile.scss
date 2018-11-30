@@ -1,9 +1,9 @@
 page-profile {
-    & .guide {
+    & .user {
 
         padding: 20px;
 
-        & .guide-image {
+        & .user-image {
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 10px;
@@ -13,23 +13,11 @@ page-profile {
             border-radius: 200px;
         }
 
-        & .guide-name, .guide-subtitle, .guide-contact {
+        & .user-name {
             width: 100%;
             text-align: center;
-        }
-
-        & .guide-name {
             font-size: 2em;
         }
-
-        & .guide-subtitle {
-            font-size: 1.2em;
-        }
-
-        & .guide-contact {
-            font-style: italic;
-        }
-
     }
 
     & .bookings {
