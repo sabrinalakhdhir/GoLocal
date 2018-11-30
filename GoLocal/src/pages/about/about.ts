@@ -8,6 +8,7 @@ import { ProfilePage } from '../profile/profile';
 import { ActivityPage } from '../activity/activity';
 import { CreateAccountPage } from '../createAccount/createAccount';
 import { LoginPage } from '../login/login';
+import { logInButton } from '../home/home';
 
 /**
  * Generated class for the AboutPage page.
@@ -38,10 +39,26 @@ export class AboutPage {
     this.navCtrl.push(AboutPage);
   }
 
-  loginModal() {
-    let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
-    existingAccountModal.present()
+  createAccountModal() {
+    if (logInButton == "My Profile")
+    {
+      this.navCtrl.push(ProfilePage)
+    }
+    else {
+      let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name});
+      createNewModal.present()
+    }
+  }
 
+  loginModal() {
+    if (logInButton == "My Profile")
+    {
+      this.navCtrl.push(ProfilePage)
+    }
+    else {
+      let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
+      existingAccountModal.present()
+    }
   }
 
 }

@@ -36,20 +36,31 @@ export class HomePage {
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
     this.testList = this.fbProvider.getActivities();
     this.logInButton = navParams.get('data');
-    if (this.logInButton == "") {
+    if (this.logInButton != "My Profile") {
       this.logInButton = "Create Account/Log In";
     }
   }
 
   createAccountModal() {
-    let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name});
-    createNewModal.present()
+    if (this.logInButton == "My Profile")
+    {
+      this.navCtrl.push(ProfilePage)
+    }
+    else {
+      let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name});
+      createNewModal.present()
+    }
   }
 
   loginModal() {
-    let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
-    existingAccountModal.present()
-
+    if (this.logInButton == "My Profile")
+    {
+      this.navCtrl.push(ProfilePage)
+    }
+    else {
+      let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
+      existingAccountModal.present()
+    }
   }
 
   goToHome() {

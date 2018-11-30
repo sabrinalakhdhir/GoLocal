@@ -1,3 +1,114 @@
 page-profile {
+    & .guide {
 
+        padding: 20px;
+
+        & .guide-image {
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px;
+            width: 400px;
+            height: 400px;
+            background-color: grey;
+            border-radius: 200px;
+        }
+
+        & .guide-name, .guide-subtitle, .guide-contact {
+            width: 100%;
+            text-align: center;
+        }
+
+        & .guide-name {
+            font-size: 2em;
+        }
+
+        & .guide-subtitle {
+            font-size: 1.2em;
+        }
+
+        & .guide-contact {
+            font-style: italic;
+        }
+
+    }
+
+    & .bookings {
+        padding-left: 450px;
+        padding-right: 100px;
+        border: 3px solid black;
+
+        margin: 10px;
+        width: 230px;
+
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+        border-radius: 10px;
+
+        & .bookings-current {
+            height: 200px;
+            border-bottom-left-radius: 1px;
+            border-bottom-right-radius: 1px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            overflow: hidden;
+        }
+        & .bookings-past {
+            border-radius: 5px;
+            padding: 10px;
+            padding-left: 25px;
+
+            white-space: normal;
+
+            & .line {
+                position: relative;
+                right: 15px;
+                background-color: transparent;
+                width: 400px;
+            }
+        }
+    }
+
+    & .activity-container {
+        margin: 10px;
+        width: 230px;
+
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+        border-radius: 10px;
+
+        & .activity-header {
+
+            height: 200px;
+            border-bottom-left-radius: 1px;
+            border-bottom-right-radius: 1px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            overflow: hidden;
+
+
+        }
+
+        & .activity-footer {
+            border-radius: 5px;
+            padding: 10px;
+            padding-left: 25px;
+
+            white-space: normal;
+
+            & .line {
+                position: relative;
+                right: 15px;
+                background-color: transparent;
+                width: 400px;
+        }
+        }
+    }
+
+    & .interests {
+
+    }
+
+    & .skills {
+
+    }
 }

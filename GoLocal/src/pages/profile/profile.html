@@ -1,27 +1,23 @@
 <ion-header>
   <ion-navbar>
     <button ion-button clear (click)="backToHome()"><img width="250" height="100" src="../../assets/imgs/GoLocalLogo.png"></button>
-    <button ion-button clear (click)="backToHome()"> Log In/Create Account</button>
+    <button ion-button clear (click)="backToHome()"> {{ logInButton }}</button>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-grid>
-        <ion-row>
-          <ion-col>
-          Column 1 of 2 <br>
-          Will Contain: <br>
-          - profile picture <br>
-          - description <br>
-          </ion-col>
-          <ion-col>
-          Column 2 of 2 <br>
-          Will Contain: <br>
-          - interests <br>
-          - current bookings <br> 
-          - past bookings <br>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+  <div> 
+    <h1> My Profile </h1> <br>
+    <h2> <div class="guide-name"> {{guide.name}} </div> </h2> 
+  </div>
+  <ion-row>
+    <ion-col col-4 class="guide">
+        <ion-row><div class="guide-image"></div></ion-row>
+    </ion-col>
+    <ion-col col-4 class="bookings" text-right>
+        <ion-row><div class="bookings-current"></div></ion-row>
+        <ion-row><div class="bookings-past"></div></ion-row>
+    </ion-col>
+    </ion-row>
   </ion-content>
 

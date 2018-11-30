@@ -8,9 +8,9 @@
         </ion-title></ion-col>
       <ion-col col-4></ion-col>
       <ion-col col-4 text-right>
-        <button class = "about" ion-button clear (click)="goToAbout()">About Us</button>
-        <!--<button ion-button clear (click)="loginModal()"> {{ logInButton }}</button>-->
-        <button class =  "user" ion-button clear (click)="loginModal()"> Log In/Create Account</button>
+          <button class = "about" ion-button clear (click)="goToAbout()">About Us</button>
+          <!--<button ion-button clear (click)="loginModal()"> {{ logInButton }}</button>-->
+          <button class =  "user" ion-button clear (click)="loginModal()">{{ logInButton}}</button>
       </ion-col>
     </ion-row>
   </ion-navbar>
@@ -27,13 +27,12 @@
       <img class = "cover-logo" src = "assets/imgs/GoLocalLogo.png"/>
     </ion-slide>
   </ion-slides>
-
   <div class="button-bar">
-    <a class="button">First</a>
-    <a class="button">Second</a>
-    <a class="button">Third</a>
-  </div>
-  
+      <a class="button">First</a>
+      <a class="button">Second</a>
+      <a class="button">Third</a>
+ </div>
+
   <div class = "heading">
     <h1>Featured</h1>
   </div>
@@ -75,4 +74,4 @@
       </ion-row>
       
   </ion-row>
-</ion-content>
+  </ion-content>

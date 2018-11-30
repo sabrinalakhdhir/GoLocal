@@ -4,6 +4,7 @@ import { NavController, ModalController, NavParams, Modal } from 'ionic-angular'
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
 import { logInButton } from '../home/home';
+import { ProfilePage } from '../profile/profile';
 
 @Component({
   selector: 'page-createAccount',
@@ -33,10 +34,16 @@ export class CreateAccountPage {
     let logInButton = "My Profile";
     this.navCtrl.setRoot(HomePage, {data: logInButton});
   }
+
   loginModal() {
-    let existingAccountModal = this.modalCtrl.create(LoginPage, { username: this.username, password: this.password });
-    existingAccountModal.present()
+    if (logInButton == "My Profile")
+    {
+      this.navCtrl.push(ProfilePage)
+    }
+    else {
+      let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
+      existingAccountModal.present()
+    }
   }
 
 }
-
