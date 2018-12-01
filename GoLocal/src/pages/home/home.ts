@@ -80,6 +80,7 @@ export class HomePage {
     existingAccountModal.present()
   }
   
+  // Routing to different pages
   goToActivity(activity) {
     console.log("Activity clicked");
     console.log(activity);
@@ -94,6 +95,11 @@ export class HomePage {
     this.navCtrl.push(ProfilePage, {
       myProfile: true
     });
+  }
+
+  goToAbout() {
+    console.log("About clicked");
+    this.navCtrl.push(AboutPage);
   }
   
   next() {
