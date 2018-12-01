@@ -50,9 +50,9 @@
     <!-- Sidebar -->
     <ion-col col-3 class="guide-sidebar">
       <ion-row><div class="guide-image"></div></ion-row>
-      <ion-row><div class="guide-name">{{guide.name}}</div></ion-row>
-      <ion-row><div class="guide-subtitle">{{guide.subtitle}}</div></ion-row>
-      <ion-row><div class="guide-contact">{{guide.contact}}</div></ion-row>
+      <ion-row><div class="guide-name">{{guideData.name}}</div></ion-row>
+      <!-- <ion-row><div class="guide-subtitle">{{guideData.subtitle}}</div></ion-row> -->
+      <ion-row><div class="guide-contact">{{guideData.contact}}</div></ion-row>
       <ion-row *ngIf="!isGuide">
         <p>Start Date</p>
         <ion-select [(ngModel)]="start-month" interface="popover" placeholder="month">

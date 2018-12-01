@@ -22,26 +22,19 @@ export class FirebaseProvider {
     return query;
   }
 
-  addUser(navCtrl,username,password,userType) {
+  addUser(navCtrl,username,password,userType,name,contact) {
     let user = {
       username: username,
       password: password,
       type: userType,
+      name: name,
+      contact: contact
     }
 
     const ID = this.afs.createId();
-    this.afs.doc('/users/'+ID).set(user)
-        .then( data => {
-          console.log("User added");
-          if (userType == 1) {
-            navCtrl.setRoot(HomePage);
-          } else {
-            navCtrl.setRoot(HomePage);
-          }
-        }, error => {
-          console.log(error);
-          alert("Could not create new acccount. Try again.");
-        });
+    this.afs.doc('/users/'+ID).set(user);
+    
+    return this.afs.doc('/users/'+ID);
   }
 
   removeUser(ID,userType) {
@@ -57,6 +50,11 @@ export class FirebaseProvider {
   getActivities() {
     return this.afs.collection('/activities').snapshotChanges();
   }
+
+  getGuideActivities(guide) {
+    return this.afs.collection('activities',
+        ref => ref.where('guide', '==', guide)).snapshotChanges();
+  }
  
   addActivity(title,description,price,guide) {
     let activity = {
@@ -67,6 +65,9 @@ export class FirebaseProvider {
     }
     const ID = this.afs.createId();
     this.afs.doc('/activities/'+ID).set(activity);
+    alert("New activity created!");
+
+    return ID;
   }
 
   updateActivity(ID,title,description,price,guide) {
@@ -100,9 +101,7 @@ export class FirebaseProvider {
   }
 
   getGuideInfo(ID) {
-    let query = this.afs.doc('/users/'+ID); 
-
-    return query.snapshotChanges();
+    return this.afs.doc('/users/'+ID).snapshotChanges(); 
   }
 
 }

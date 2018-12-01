@@ -56,12 +56,12 @@ export class LoginPage {
             console.log("Guide logged in. Going to dashboard");
             this.navCtrl.setRoot(DashboardPage, {
               loggedIn: true,
-              name: user[0]['username']
+              name: user[0]['name']
             });
           } else {
             this.navCtrl.setRoot(HomePage, {
               loggedIn: true,
-              name: user[0]['username']
+              name: user[0]['name']
             });
           }
         } else {

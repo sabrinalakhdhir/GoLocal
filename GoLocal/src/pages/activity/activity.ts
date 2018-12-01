@@ -40,7 +40,7 @@ export class ActivityPage {
 
   private guideData = {
     name: "Rocky Climber",
-    subtitle: "The bestest boulderer around",
+    // subtitle: "The bestest boulderer around",
     contact: "rocky@climbeverything.com"
   }
 
@@ -65,18 +65,15 @@ export class ActivityPage {
       this.activity = activity.val;
 
       this.fbProvider.getGuideInfo(this.activity.guide)
-      .subscribe(actions => {
-        (action => {
-          console.log(action);
-          const value = action.payload.doc.data();
-          let guide = {
-            name: value.name,
-            contact: value.contact,
-            subtitle: value.subtitle
+      .subscribe( guide => {
+          console.log("After getting guide info:");
+          const value = guide.payload.data();
+          let data = {
+            name: value['name'],
+            contact: value['contact'],
           }
-          this.guideData = guide;
+          this.guideData = data;
         });
-      })
 
       for (var i=0; i<31; i++) { this.days.push(i); }
   }
@@ -90,10 +87,6 @@ export class ActivityPage {
     let existingAccountModal = this.modalCtrl.create(LoginPage, { });
     existingAccountModal.present()
   }
-
-  // onBook() {
-  //   this.navCtrl.setRoot(PaymentPage);
-  // }
 
   goToProfile() {
     this.navCtrl.setRoot(ProfilePage);
@@ -111,10 +104,10 @@ export class ActivityPage {
   }
 
   editDescription() {
-    this.editingPrice = true;
+    this.editingDescription = true;
   }
 
-  // When booking an activity
+  // When booking an activity (FOR TRAVELLERS)
   onBook() {
     if (this.loggedIn) {
       this.navCtrl.push(PaymentPage)
@@ -135,12 +128,12 @@ export class ActivityPage {
     this.storage.get('user').then( user => {
       let ID = this.activity_ID;
       let guide = user.id;
-      if (ID != "") {
+      if (ID != null) {
         console.log("Updating activity");
         this.fbProvider.updateActivity(ID,this.activity.title,this.activity.description,this.activity.price,guide);
       } else {
         console.log("Adding new activity");
-        this.fbProvider.addActivity(this.activity.title,this.activity.description,this.activity.price,guide)
+        this.activity_ID = this.fbProvider.addActivity(this.activity.title,this.activity.description,this.activity.price,guide)
       }
     })
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { FirebaseProvider } from '../../providers/firebase';
 
@@ -33,24 +34,29 @@ export class DashboardPage {
   private activitiesDB;
   private activitiesData = [];
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,  public fbProvider: FirebaseProvider, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,  public fbProvider: FirebaseProvider, public storage: Storage, public navParams: NavParams) {
     this.username = this.navParams.get('name')
     this.logInButton = this.username + "'s Profile";
     
-    // Get list from Firestore
-    this.activitiesDB = this.fbProvider.getActivities();
-    // Convert Firestore object to normal object
-    this.activitiesDB.subscribe(actions => {
-      actions.forEach(action => {
-        const value = action.payload.doc.data();
-        const id = action.payload.doc.id;
-        this.activitiesData.push({
-          id: id,
-          val: value
+    this.storage.get('user').then( user => {
+      let guideID = user.id;
+      console.log(guideID);
+      // Get list from Firestore
+      this.activitiesDB = this.fbProvider.getGuideActivities(guideID);
+      // Convert Firestore object to normal object
+      this.activitiesDB.subscribe(actions => {
+        actions.forEach(action => {
+          const value = action.payload.doc.data();
+          const id = action.payload.doc.id;
+          this.activitiesData.push({
+            id: id,
+            val: value
+          });
         });
-      });
+      })
+      console.log(this.activitiesData);
     })
-    console.log(this.activitiesData);
+    
   }
 
   createAccountModal() {
@@ -64,18 +70,23 @@ export class DashboardPage {
   }
 
   addActivity() {
-    const activity = {
-      id: null,
-      val: {
-        title: "Click edit button to change title",
-        price: 0,
-        description: "Click edit button to change description"
+    this.storage.get('user').then( user => {
+      let id = user.id;
+      const activity = {
+        id: null,
+        val: {
+          title: "Click edit button to change title",
+          price: 0,
+          description: "Click edit button to change description",
+          guide: id
+        }
       }
-    }
-    this.navCtrl.push(ActivityPage, {
-      userType: 1,
-      activity: activity
+      this.navCtrl.push(ActivityPage, {
+        userType: 1,
+        activity: activity
+      })
     })
+    
   }
 
   goToActivity(activity) {
