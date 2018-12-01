@@ -34,7 +34,10 @@ export class HomePage {
   */];
 
   private activitiesDB;
-  private activitiesData = [];
+  private activities_featured = [];
+  private activities_regular = [];
+  private activities_cat1 = [];
+  private activities_cat2 = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
     // Get list from Firestore
@@ -45,13 +48,20 @@ export class HomePage {
         console.log(action);
         const value = action.payload.doc.data();
         const id = action.payload.doc.id;
-        this.activitiesData.push({
-          id: id,
-          val: value
-        });
+        this.addToActivityArray(value.category,value);
       });
     })
-    console.log(this.activitiesData);
+    console.log(this.activities_regular);
+    console.log(this.activities_featured);
+  }
+
+  addToActivityArray(category,activity) {
+    switch (category) {
+      case 1: this.activities_featured.push(activity); break;
+      case 2: this.activities_cat1.push(activity); break;
+      case 3: this.activities_cat2.push(activity); break;
+      default: this.activities_regular.push(activity); break;
+    }
   }
 
   ionViewDidEnter() {

@@ -3,11 +3,8 @@
     <ion-row>
       <ion-col col-4 text-left>
         <ion-title class = "logo">
-          <!--<img src= "assets/imgs/GoLocalLogo.png" (click)="addItem()"/>-->
           <img src= "assets/imgs/GoLocalLogo.png" (click)="goToHome()"/>
         </ion-title></ion-col>
-      <ion-col col-4></ion-col>
-
       <ion-col col-4></ion-col>
       <ion-col col-4 text-right>
         <button class = "about" ion-button clear (click)="goToAbout()">About Us</button>
@@ -30,9 +27,14 @@
     </ion-slide>
   </ion-slides>
   <div class="button-bar">
-      <a class="button">First</a>
-      <a class="button">Second</a>
-      <a class="button">Third</a>
+    <ion-row>
+      <ion-col col-2 class="cat-container cat-1"><div class="category"></div><p class="cat-text">First</p></ion-col>
+      <ion-col col-2 class="cat-container cat-2"><div class="category"></div><p class="cat-text">Second</p></ion-col>
+      <ion-col col-2 class="cat-container cat-3"><div class="category"></div><p class="cat-text">Third</p></ion-col>
+      <ion-col col-2 class="cat-container cat-4"><div class="category"></div><p class="cat-text">Fourth</p></ion-col>
+      <ion-col col-2 class="cat-container cat-5"><div class="category"></div><p class="cat-text">Fifth</p></ion-col>
+      <ion-col col-2 class="cat-container cat-6"><div class="category"></div><p class="cat-text">Sixth</p></ion-col>
+    </ion-row>
  </div>
 
   <div class = "heading">
@@ -42,13 +44,13 @@
 
       <ion-row class="activity-row">
     
-          <div class="activity-container" *ngFor="let activity of activitiesData" (click)="goToActivity(activity)">
-            <ion-row class="activity-header"><img src = {{activity.val.image}}/></ion-row>
+          <div class="activity-container" *ngFor="let activity of activities_featured" (click)="goToActivity(activity)">
+            <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
             <ion-row class="activity-footer">
-              <ion-item class="line">
-                {{activity.val.title}} <span item-end class="activity-price">${{activity.val.price}} CAD</span>
+              <ion-item class="line" text-wrap>
+                {{activity.title}} <span item-end class="activity-price">${{activity.price}} CAD</span>
               </ion-item>
-              <p>{{activity.val.description}}</p>
+              <p>{{activity.description}}</p>
             </ion-row>
           </div>
     
@@ -63,10 +65,10 @@
 
       <ion-row class="activity-row">
     
-          <div class="activity-container" *ngFor="let activity of activities" (click)="goToActivity()">
+          <div class="activity-container" *ngFor="let activity of activities_regular" (click)="goToActivity()">
             <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
             <ion-row class="activity-footer">
-              <ion-item class="line">
+              <ion-item class="line" text-wrap>
                 {{activity.title}} <span item-end class="activity-price">${{activity.price}} CAD</span>
               </ion-item>
               <p>{{activity.description}}</p>
