@@ -12,31 +12,19 @@
 </ion-header>
 
 <ion-content padding>
-  <div> 
-    <h1> My Profile </h1> <br>
-    <h2> <div class="user-name"> {{user.name}} </div> </h2> 
-  </div>
+    <ion-row>
+        <ion-col col-9 text-left><h1>My Profile</h1></ion-col>
+        <ion-col col-3>
+          <button ion-button *ngIf="editProfile" (click)="updateProfile()"><ion-icon name="save" float-right></ion-icon>Save Profile</button>
+        </ion-col>
+      </ion-row>
   <ion-row>
     <ion-col col-4 class="user">
         <ion-row><div class="user-image"></div></ion-row>
     </ion-col>
-    <ion-col col-4 class="bookings" text-right>
-        <ion-row><div class="bookings-current"></div></ion-row>
-        <ion-row><div class="bookings-past"></div></ion-row>
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-
-    <ion-col col-1>
-      <button ion-button *ngIf="editProfile" (click)="updateProfile()"><ion-icon name="save"></ion-icon>Save Profile</button>
-    </ion-col>
 
     <!-- Main Content -->
-    <div> 
-      <h1> My Profile </h1> <br>
-      <h2> <div class="user-name"> {{user.name}} </div> </h2> 
-    </div>
+    
     <ion-col col-7 class="profile-details">
       <ion-row class="image-row">
         <ion-col col-4 class="image-container"></ion-col>
@@ -57,10 +45,31 @@
         <ion-textarea *ngIf="editingBio" [(ngModel)]="profile.bio"></ion-textarea>
         <button ion-button *ngIf="editProfile" (click)="editDescription()"><ion-icon name="create"></ion-icon>Edit Bio</button>
       </ion-row>
+
+
     </ion-col>
 
-    <ion-col col-1></ion-col>
-
+  </ion-row>
+  <ion-row>
+      <ion-col col-12 class="bookings" text-left>
+          <ion-row>
+            <div class="bookings-current">
+              <h1>Current Activities</h1>
+              <p class="no-activities" *ngIf="activities_user.length <= 0">No activities currently booked</p>
+              <ion-row class="activity-row">
+                  <div class="activity-container" *ngFor="let activity of activities_user" (click)="goToActivity(activity)">
+                    <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
+                    <ion-row class="activity-footer">
+                      <ion-item class="line" text-wrap>
+                        {{activity.title}} <span item-end class="activity-price">${{activity.price}} CAD</span>
+                      </ion-item>
+                      <p>{{activity.description}}</p>
+                    </ion-row>
+                  </div>
+              </ion-row>
+            </div>
+          </ion-row>
+      </ion-col>
   </ion-row>
       
 

@@ -28,14 +28,32 @@
   </ion-slides>
   <div class="button-bar">
     <ion-row>
-      <ion-col col-2 class="cat-container cat-1"><div class="category"></div><p class="cat-text">First</p></ion-col>
-      <ion-col col-2 class="cat-container cat-2"><div class="category"></div><p class="cat-text">Second</p></ion-col>
-      <ion-col col-2 class="cat-container cat-3"><div class="category"></div><p class="cat-text">Third</p></ion-col>
-      <ion-col col-2 class="cat-container cat-4"><div class="category"></div><p class="cat-text">Fourth</p></ion-col>
-      <ion-col col-2 class="cat-container cat-5"><div class="category"></div><p class="cat-text">Fifth</p></ion-col>
-      <ion-col col-2 class="cat-container cat-6"><div class="category"></div><p class="cat-text">Sixth</p></ion-col>
+      <ion-col col-2 class="cat-container cat-1"><div class="category" (click)="showCategory(1)"></div><p class="cat-text">First</p></ion-col>
+      <ion-col col-2 class="cat-container cat-2"><div class="category" (click)="showCategory(2)"></div><p class="cat-text">Second</p></ion-col>
+      <ion-col col-2 class="cat-container cat-3"><div class="category" (click)="showCategory(3)"></div><p class="cat-text">Third</p></ion-col>
+      <ion-col col-2 class="cat-container cat-4"><div class="category" (click)="showCategory(4)"></div><p class="cat-text">Fourth</p></ion-col>
+      <ion-col col-2 class="cat-container cat-5"><div class="category" (click)="showCategory(5)"></div><p class="cat-text">Fifth</p></ion-col>
+      <ion-col col-2 class="cat-container cat-6"><div class="category" (click)="showCategory(6)"></div><p class="cat-text">Sixth</p></ion-col>
     </ion-row>
  </div>
+
+  <div class="heading" *ngIf="categorySelected > 0"><h1>{{categoryHeading}}</h1></div>
+  <ion-row class="category-row" *ngIf="categorySelected > 0">
+    
+    <ion-row class="activity-row">
+        <h4 *ngIf="activities_category.length < 1">No actvities found for this category</h4>
+        <div class="activity-container" *ngFor="let activity of activities_category" (click)="goToActivity(activity)">
+          <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
+          <ion-row class="activity-footer">
+            <ion-item class="line" text-wrap>
+              {{activity.title}} <span item-end class="activity-price">${{activity.price}} </span>
+            </ion-item>
+            <p>{{activity.description}}</p>
+          </ion-row>
+        </div>
+    </ion-row>
+      
+  </ion-row>
 
   <div class = "heading">
     <h1>Featured</h1>
@@ -43,17 +61,15 @@
   <ion-row class="category-row">
 
       <ion-row class="activity-row">
-    
           <div class="activity-container" *ngFor="let activity of activities_featured" (click)="goToActivity(activity)">
             <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
             <ion-row class="activity-footer">
               <ion-item class="line" text-wrap>
-                {{activity.title}} <span item-end class="activity-price">${{activity.price}} CAD</span>
+                {{activity.title}} <span item-end class="activity-price">${{activity.price}} </span>
               </ion-item>
               <p>{{activity.description}}</p>
             </ion-row>
           </div>
-    
       </ion-row>
       
   </ion-row>
@@ -64,18 +80,19 @@
   <ion-row class="category-row">
 
       <ion-row class="activity-row">
-    
           <div class="activity-container" *ngFor="let activity of activities_regular" (click)="goToActivity()">
             <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
             <ion-row class="activity-footer">
               <ion-item class="line" text-wrap>
-                {{activity.title}} <span item-end class="activity-price">${{activity.price}} CAD</span>
+                {{activity.title}} <span item-end class="activity-price">${{activity.price}} </span>
               </ion-item>
               <p>{{activity.description}}</p>
             </ion-row>
           </div>
-    
       </ion-row>
       
   </ion-row>
-  </ion-content>
+
+  <div class="footer">Copyright GoLocal 2018</div>
+</ion-content>
+

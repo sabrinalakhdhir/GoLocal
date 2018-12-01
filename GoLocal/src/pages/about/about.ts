@@ -17,12 +17,13 @@ import { logInButton } from '../home/home';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html',
 })
 export class AboutPage {
+
+  private logInButton = "Create Account/Log In";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
   }
@@ -40,25 +41,13 @@ export class AboutPage {
   }
 
   createAccountModal() {
-    if (logInButton == "My Profile")
-    {
-      this.navCtrl.push(ProfilePage)
-    }
-    else {
-      let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name});
-      createNewModal.present()
-    }
+    let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name});
+    createNewModal.present()
   }
 
   loginModal() {
-    if (logInButton == "My Profile")
-    {
-      this.navCtrl.push(ProfilePage)
-    }
-    else {
-      let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
-      existingAccountModal.present()
-    }
+    let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
+    existingAccountModal.present()
   }
 
 }

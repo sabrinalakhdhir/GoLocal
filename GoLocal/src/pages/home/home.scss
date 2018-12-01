@@ -95,8 +95,6 @@ page-home {
             	border-top-left-radius: 8px;
             	border-top-right-radius: 8px;
             	overflow: hidden;
-
-
         	}
 
         	& .activity-footer {
@@ -104,7 +102,20 @@ page-home {
             	padding: 10px;
                 padding-left: 25px;
 
-            	white-space: normal;
+                white-space: normal;
+                
+                & ion-label {
+					font-weight: bold !important;
+					font-size: 1.2em;
+					line-height: 1em;
+				}
+				
+				& .activity-price {
+					margin: 0px !important;
+                    font-weight: bold !important;
+                    font-style: italic !important;
+					font-size: 1.2em;
+				}
 
             	& .line {
                     position: relative;
@@ -131,6 +142,14 @@ page-home {
         padding: 20px;
         background-color: white;
         position: absolute;
+    }
+
+    & .footer {
+        margin-top: 30px;
+        padding: 10px;
+        background: black;
+        color: white;
+        height: 50px;
     }
     
 }

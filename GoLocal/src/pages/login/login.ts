@@ -52,17 +52,19 @@ export class LoginPage {
     // Check value of queried user and route to appropriate page
     userObject.valueChanges().subscribe( user => {
         if (user.length > 0) {
+          console.log(user)
+          let name = user[0]['name']
           if (user[0]['type'] == 1) {
-            console.log(user[0]['type']);
             console.log("Guide logged in. Going to dashboard");
             this.navCtrl.setRoot(DashboardPage, {
               loggedIn: true,
-              name: user[0]['name']
+              name: name
             });
           } else {
+            alert("Logged in as " + name)
             this.navCtrl.setRoot(HomePage, {
               loggedIn: true,
-              name: user[0]['name']
+              name: name
             });
           }
         } else {

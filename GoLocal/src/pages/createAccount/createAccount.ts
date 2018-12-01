@@ -66,13 +66,13 @@ export class CreateAccountPage {
       if (value['userType'] == 1) {
         this.navCtrl.setRoot(DashboardPage, {
           loggedIn: true,
-          name: name,
+          name: this.fullname,
           id: id
         });
       } else {
         this.navCtrl.setRoot(HomePage, {
           loggedIn: true,
-          name: name,
+          name: this.fullname,
         });
       }
     }, error => {

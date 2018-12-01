@@ -19,9 +19,30 @@ page-dashboard {
 
     }
 
+	////// Main BODY /////////
+
+	$body-padding: 20px;
+
+	& .dashboard-header {
+		padding: 20px 20px;
+		
+		& h1 {
+			margin: 0px !important;
+			font-size: 2.5em;
+		}
+
+		& button {
+			font-size: 1.5em;
+			padding: 20px;
+		}
+
+		& ion-col {
+			padding: 0px !important;
+		}
+	}
+
     & .heading {
-    	padding-left: 225px;
-    	padding-top: 30px;
+    	padding: 0px $body-padding;
     }
 
     & .logo { 
@@ -32,8 +53,7 @@ page-dashboard {
     }
 
     & .activity-row {
-    	padding-left: 225px;
-    	padding-right: 100px;
+    	padding: 0px $body-padding;
     	/*flex-wrap: nowrap;*/
 
     	& .activity-container {
@@ -41,8 +61,9 @@ page-dashboard {
         	width: 230px;
 
         	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
     	    border-radius: 10px;
+
+			& ion-item, .item-inner { padding: 0px !important; margin: 0px !important; }
 
         	& .activity-header {
 
@@ -52,19 +73,30 @@ page-dashboard {
             	border-top-left-radius: 8px;
             	border-top-right-radius: 8px;
             	overflow: hidden;
-
-
         	}
 
         	& .activity-footer {
         		border-radius: 5px;
             	padding: 10px;
+				white-space: normal;
 
-            	white-space: normal;
+				& ion-label {
+					font-weight: bold !important;
+					font-size: 1.2em;
+					line-height: 1em;
+				}
+				
+				& .activity-price {
+					margin: 0px !important;
+					padding-right: 5px;
+					// font-weight: bold !important;
+					font-style: italic !important;
+					font-size: 1.4em;
+				}
 
             	& .line {
             	background-color: transparent;
-            }
+            	}
         	}
     	}
     }

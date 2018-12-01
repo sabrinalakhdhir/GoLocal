@@ -14,10 +14,15 @@
 </ion-header>
 
 <ion-content>
-  <h1>Guide Dashboard</h1>
+  <ion-row class="dashboard-header">
+    <ion-col col-4><h1 class="dashboard-text">Guide Dashboard</h1></ion-col>
+    <ion-col col-4></ion-col>
+    <ion-col col-4 text-right>
+      <button ion-button (click)="addActivity()">+ Add New Activity</button>
+    </ion-col>
+  </ion-row>
   <div class = "heading">
     <h1>My Activities</h1>
-    <button ion-button (click)="addActivity()">+</button>
   </div>
   <ion-row class="category-row">
 
@@ -26,8 +31,8 @@
           <div class="activity-container" *ngFor="let activity of activitiesData" (click)="goToActivity(activity)">
             <ion-row class="activity-header"><img src = {{activity.val.image}}/></ion-row>
             <ion-row class="activity-footer">
-              <ion-item class="line">
-                {{activity.val.title}} <span item-end class="activity-price">${{activity.val.price}} CAD</span>
+              <ion-item class="line" text-wrap>
+                {{activity.val.title}} <span item-end class="activity-price">${{activity.val.price}}</span>
               </ion-item>
               <p>{{activity.val.description}}</p>
             </ion-row>

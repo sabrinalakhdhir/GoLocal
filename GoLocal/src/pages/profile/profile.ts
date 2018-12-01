@@ -22,15 +22,30 @@ export class ProfilePage {
     bio: "User bio"
   }
 
+  private activities_user = [];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public fbProvider: FirebaseProvider) {
     this.editProfile = this.navParams.get('myProfile');
     // Check if user has stored profile details to display
     this.storage.get('user').then( user => {
       console.log(user);
-      if (user.val.fullname) {
-        this.profile.name = user.val.fullname;
-        this.profile.bio = user.val.bio;
+      if (user.val.name) {
+        this.profile.name = user.val.name;
+        if (user.val.bio) {
+          this.profile.bio = user.val.bio;
+        } else {
+          this.profile.bio = "Tell us something about yourself like your personal interests or travel goals";
+        }
       }
+      // Get user's activities that they booked
+      this.fbProvider.getUserActivities(user.id).subscribe(actions => {
+        actions.forEach(action => {
+          console.log(action);
+          const value = action.payload.doc.data();
+          const id = action.payload.doc.id;
+          this.activities_user.push(value)
+        });
+      })
     })
   }
 

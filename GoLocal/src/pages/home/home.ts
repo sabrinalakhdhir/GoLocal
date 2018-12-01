@@ -33,11 +33,21 @@ export class HomePage {
     { image: "assets/imgs/GoLocalLogo.png", title: 'Activity', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
   */];
 
+
   private activitiesDB;
   private activities_featured = [];
   private activities_regular = [];
+
+  private categorySelected = -1;
+  private categoryHeading = "";
+  private activities_category = [];
+
   private activities_cat1 = [];
   private activities_cat2 = [];
+  private activities_cat3 = [];
+  private activities_cat4 = [];
+  private activities_cat5 = [];
+  private activities_cat6 = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
     // Get list from Firestore
@@ -57,9 +67,13 @@ export class HomePage {
 
   addToActivityArray(category,activity) {
     switch (category) {
-      case 1: this.activities_featured.push(activity); break;
-      case 2: this.activities_cat1.push(activity); break;
-      case 3: this.activities_cat2.push(activity); break;
+      case 1: this.activities_cat1.push(activity); this.activities_regular.push(activity);break;
+      case 2: this.activities_cat2.push(activity); this.activities_regular.push(activity); break;
+      case 3: this.activities_cat3.push(activity); this.activities_regular.push(activity); break;
+      case 4: this.activities_cat4.push(activity); this.activities_regular.push(activity); break;
+      case 5: this.activities_cat5.push(activity); this.activities_regular.push(activity); break;
+      case 6: this.activities_cat6.push(activity); this.activities_regular.push(activity); break;
+      case 99: this.activities_featured.push(activity); break;
       default: this.activities_regular.push(activity); break;
     }
   }
@@ -74,15 +88,33 @@ export class HomePage {
     }
   }
 
+  showCategory(category) {
+    this.categorySelected = category;
+    switch (category) {
+      case 1: this.activities_category = this.activities_cat1;
+              this.categoryHeading = "First"; break;
+      case 2: this.activities_category = this.activities_cat2;
+              this.categoryHeading = "Second"; break;
+      case 3: this.activities_category = this.activities_cat3;
+              this.categoryHeading = "Third"; break;
+      case 4: this.activities_category = this.activities_cat4;
+              this.categoryHeading = "Fourth"; break;
+      case 5: this.activities_category = this.activities_cat5;
+              this.categoryHeading = "Fifth"; break;
+      case 6: this.activities_category = this.activities_cat6;
+              this.categoryHeading = "Sixth"; break;
+      default: this.activities_category = [];
+              this.categoryHeading = ""; break;
+    }
+  }
+
+
+
+  /////// Accounts /////////
+
   createAccountModal() {
-    if (this.logInButton == "My Profile")
-    {
-      this.navCtrl.push(ProfilePage)
-    }
-    else {
-      let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name});
-      createNewModal.present()
-    }
+    let createNewModal = this.modalCtrl.create(CreateAccountPage, { username: name});
+    createNewModal.present()
   }
 
   loginModal() {
@@ -90,7 +122,8 @@ export class HomePage {
     existingAccountModal.present()
   }
   
-  // Routing to different pages
+  /////// Routing //////////
+
   goToActivity(activity) {
     console.log("Activity clicked");
     console.log(activity);

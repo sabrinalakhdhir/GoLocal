@@ -7,8 +7,8 @@ page-profile {
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 10px;
-            width: 400px;
-            height: 400px;
+            width: 300px;
+            height: 300px;
             background-color: grey;
             border-radius: 200px;
         }
@@ -21,19 +21,16 @@ page-profile {
     }
 
     & .bookings {
-        padding-left: 450px;
-        padding-right: 100px;
-        border: 3px solid black;
-
+        padding: 10px 20px;
         margin: 10px;
         width: 230px;
 
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        // border: 3px solid black;
+        // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
         border-radius: 10px;
 
         & .bookings-current {
-            height: 200px;
             border-bottom-left-radius: 1px;
             border-bottom-right-radius: 1px;
             border-top-left-radius: 8px;
@@ -72,8 +69,6 @@ page-profile {
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
             overflow: hidden;
-
-
         }
 
         & .activity-footer {
