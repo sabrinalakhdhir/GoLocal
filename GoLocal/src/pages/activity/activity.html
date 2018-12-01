@@ -3,7 +3,10 @@
     <ion-row>
       <ion-col col-4 text-left><ion-title>GoLocal</ion-title></ion-col>
       <ion-col col-4></ion-col>
-      <ion-col col-4 text-right><button ion-button clear (click)="loginModal()"> Log In/Create Account</button></ion-col>
+      <ion-col col-4 text-right>
+          <button ion-button clear *ngIf="loggedIn" (click)="goToProfile()">{{ logInButton }}</button>
+          <button ion-button clear *ngIf="!loggedIn" (click)="loginModal()"> {{ logInButton }}</button>
+      </ion-col>
     </ion-row>
   </ion-navbar>
 </ion-header>
@@ -13,7 +16,7 @@
   <ion-row>
 
     <ion-col col-1>
-      <button ion-button *ngIf="isGuide" (click)="onSave()"><ion-icon name="save"></ion-icon>Save Activity</button>
+      <button ion-button *ngIf="isGuide" (click)="saveActivity()"><ion-icon name="save"></ion-icon>Save Activity</button>
     </ion-col>
 
     <!-- Main Content -->
@@ -27,19 +30,19 @@
       <ion-row class="title">
         <ion-col col-8>
           <ion-title *ngIf="!editingTitle">{{activity.title}}</ion-title>
-          <ion-input *ngIf="editingTitle" [(ngModel)]="title"></ion-input>
+          <ion-input *ngIf="editingTitle" [(ngModel)]="activity.title"></ion-input>
           <button ion-button *ngIf="isGuide" (click)="editTitle()"><ion-icon name="create"></ion-icon>Edit Title</button>
         </ion-col>
         <ion-col col-4>
           <ion-title *ngIf="!editingPrice">$ {{activity.price}}</ion-title>
-          <ion-input *ngIf="editingPrice" [(ngModel)]="price"></ion-input>
+          <ion-input *ngIf="editingPrice" [(ngModel)]="activity.price"></ion-input>
           <button ion-button *ngIf="isGuide" (click)="editPrice()"><ion-icon name="create"></ion-icon>Edit Price</button>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <p *ngIf="!editingDescription">{{activity.description}}</p>
-        <ion-textarea *ngIf="editingDescription" [(ngModel)]="description"></ion-textarea>
+        <ion-textarea *ngIf="editingDescription" [(ngModel)]="activity.description"></ion-textarea>
         <button ion-button *ngIf="isGuide" (click)="editDescription()"><ion-icon name="create"></ion-icon>Edit Description</button>
       </ion-row>
     </ion-col>
@@ -47,10 +50,10 @@
     <!-- Sidebar -->
     <ion-col col-3 class="guide-sidebar">
       <ion-row><div class="guide-image"></div></ion-row>
-      <ion-row><div class="guide-name">{{guide.name}}</div></ion-row>
-      <ion-row><div class="guide-subtitle">{{guide.subtitle}}</div></ion-row>
-      <ion-row><div class="guide-contact">{{guide.contact}}</div></ion-row>
-      <ion-row>
+      <ion-row><div class="guide-name">{{guideData.name}}</div></ion-row>
+      <!-- <ion-row><div class="guide-subtitle">{{guideData.subtitle}}</div></ion-row> -->
+      <ion-row><div class="guide-contact">{{guideData.contact}}</div></ion-row>
+      <ion-row *ngIf="!isGuide">
         <p>Start Date</p>
         <ion-select [(ngModel)]="start-month" interface="popover" placeholder="month">
           <ion-option *ngFor="let val of months" value="{{val}}">{{val}}</ion-option>
@@ -59,7 +62,7 @@
           <ion-option *ngFor="let val of days" value="{{val}}">{{val}}</ion-option>
         </ion-select>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="!isGuide">
         <p>End Date</p>
         <ion-select [(ngModel)]="end-month" interface="popover" placeholder="month">
           <ion-option *ngFor="let val of months" value="{{val}}">{{val}}</ion-option>
@@ -70,7 +73,7 @@
       </ion-row>
 
       <ion-row>
-        <button ion-button (click)="onBook()">Book Now</button>
+        <button ion-button *ngIf="!isGuide" (click)="onBook()">Book Now</button>
       </ion-row>
     </ion-col>
 

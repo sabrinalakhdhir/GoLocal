@@ -3,12 +3,14 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { DirectivesModule } from '../directives/directives.module';
 import { ElasticHeaderDirective } from '../directives/elastic-header/elastic-header';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { DashboardPage } from '../pages/dashboard/dashboard';
 import { AboutPage } from '../pages/about/about';
 import { ActivityPage } from '../pages/activity/activity';
 import { ProfilePage } from '../pages/profile/profile';
@@ -19,7 +21,8 @@ import { PaymentPage } from '../pages/payment/payment';
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from 'angularfire2';
-import { FirebaseProvider } from './../providers/firebase';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { FirebaseProvider } from '../providers/firebase';
  
 const firebaseConfig = {
     apiKey: "AIzaSyDb7Ifl2bypRHfuIHFEkgKXh4XaO9qnMYI",
@@ -34,6 +37,7 @@ const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
+    DashboardPage,
     AboutPage,
     ProfilePage,
     ActivityPage,
@@ -44,14 +48,17 @@ const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
+    DashboardPage,
     AboutPage,
     ProfilePage,
     ActivityPage,

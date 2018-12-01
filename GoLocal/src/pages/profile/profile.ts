@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { FirebaseProvider } from '../../providers/firebase';
 
-import { AboutPage } from '../about/about';
-import { HomePage, logInButton } from '../home/home';
-import { CreateAccountPage } from '../createAccount/createAccount';
-import { LoginPage } from '../login/login';
-import { PaymentPage } from '../payment/payment';
-import { isString } from 'ionic-angular/util/util';
+import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-profile',
@@ -16,16 +12,37 @@ import { isString } from 'ionic-angular/util/util';
 })
 export class ProfilePage {
 
-  private user = 0;
+  private editProfile = false;
 
-  private userData = {
-    name: "Rocky Climber",
-    image: ""
+  private editName = false;
+  private editBio = false;
+
+  private profile = {
+    name: "My Full Name",
+    bio: "User bio"
   }
-  constructor(public navCtrl: NavController) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public fbProvider: FirebaseProvider) {
+    this.editProfile = this.navParams.get('myProfile');
+    // Check if user has stored profile details to display
+    this.storage.get('user').then( user => {
+      console.log(user);
+      if (user.val.fullname) {
+        this.profile.name = user.val.fullname;
+        this.profile.bio = user.val.bio;
+      }
+    })
   }
 
   backToHome() {
     this.navCtrl.setRoot(HomePage);
+  }
+
+  updateProfile() {
+    this.storage.get('user').then( user => {
+      let ID = user.id;
+      let type = user.val.type;
+      this.fbProvider.updateProfile(ID,type,this.profile.name,this.profile.bio);
+    })
   }
 }

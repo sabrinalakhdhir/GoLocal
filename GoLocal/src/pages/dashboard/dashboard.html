@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-row>
+      <ion-col col-4 text-left>
+        <ion-title class = "logo">
+          <img src= "assets/imgs/GoLocalLogo.png" />
+        </ion-title></ion-col>
+      <ion-col col-4></ion-col>
+      <ion-col col-4 text-right>
+          <button ion-button clear *ngIf="loggedIn" (click)="goToProfile()">{{ logInButton }}</button>
+          <button ion-button clear *ngIf="!loggedIn" (click)="loginModal()"> {{ logInButton }}</button>      </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <h1>Guide Dashboard</h1>
+  <div class = "heading">
+    <h1>My Activities</h1>
+    <button ion-button (click)="addActivity()">+</button>
+  </div>
+  <ion-row class="category-row">
+
+      <ion-row class="activity-row">
+    
+          <div class="activity-container" *ngFor="let activity of activitiesData" (click)="goToActivity(activity)">
+            <ion-row class="activity-header"><img src = {{activity.val.image}}/></ion-row>
+            <ion-row class="activity-footer">
+              <ion-item class="line">
+                {{activity.val.title}} <span item-end class="activity-price">${{activity.val.price}} CAD</span>
+              </ion-item>
+              <p>{{activity.val.description}}</p>
+            </ion-row>
+          </div>
+    
+      </ion-row>
+      
+  </ion-row>
+
+</ion-content>

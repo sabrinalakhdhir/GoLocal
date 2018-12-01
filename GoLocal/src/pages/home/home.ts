@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
 
 import { FirebaseProvider } from '../../providers/firebase';
+import { map } from 'rxjs/operators';
 
-
+import { DashboardPage } from '../dashboard/dashboard';
 import { AboutPage } from '../about/about';
 import { ProfilePage } from '../profile/profile';
 import { ActivityPage } from '../activity/activity';
@@ -20,7 +20,9 @@ import { LoginPage } from '../login/login';
 export class HomePage {
 
   @ViewChild('slides') slides: Slides;
-  logInButton = "Create Account/Log In";
+
+  private loggedIn = false;
+  private logInButton = "Create Account/Log In";
 
   private activities = [
     { image: "assets/imgs/1.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
@@ -31,13 +33,34 @@ export class HomePage {
     { image: "assets/imgs/GoLocalLogo.png", title: 'Activity', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
   */];
 
-  private testList;
+  private activitiesDB;
+  private activitiesData = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
-    this.testList = this.fbProvider.getActivities();
-    this.logInButton = navParams.get('data');
-    if (this.logInButton != "My Profile") {
-      this.logInButton = "Create Account/Log In";
+    // Get list from Firestore
+    this.activitiesDB = this.fbProvider.getActivities();
+    // Convert Firestore object to normal object
+    this.activitiesDB.subscribe(actions => {
+      actions.forEach(action => {
+        console.log(action);
+        const value = action.payload.doc.data();
+        const id = action.payload.doc.id;
+        this.activitiesData.push({
+          id: id,
+          val: value
+        });
+      });
+    })
+    console.log(this.activitiesData);
+  }
+
+  ionViewDidEnter() {
+    console.log("Home entered");
+    let loggedIn = this.navParams.get('loggedIn');
+    let name = this.navParams.get('name');
+    if (loggedIn) {
+      this.loggedIn = true;
+      this.logInButton = name + "'s Profile";
     }
   }
 
@@ -53,30 +76,24 @@ export class HomePage {
   }
 
   loginModal() {
-    if (this.logInButton == "My Profile")
-    {
-      this.navCtrl.push(ProfilePage)
-    }
-    else {
-      let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
-      existingAccountModal.present()
-    }
+    let existingAccountModal = this.modalCtrl.create(LoginPage, { username: name});
+    existingAccountModal.present()
   }
-
-  goToHome() {
-    this.navCtrl.push(HomePage);
-  }
-
-  goToAbout() {
-    this.navCtrl.push(AboutPage);
-  }
-
-  goToActivity() {
-    this.navCtrl.push(ActivityPage, { activity_ID: "" });
+  
+  goToActivity(activity) {
+    console.log("Activity clicked");
+    console.log(activity);
+    this.navCtrl.push(ActivityPage, {
+      loggedIn: this.loggedIn,
+      userType: 0, 
+      activity: activity });
   }
 
   goToProfile() {
-    this.navCtrl.push(ProfilePage);
+    console.log("Profile clicked");
+    this.navCtrl.push(ProfilePage, {
+      myProfile: true
+    });
   }
   
   next() {
@@ -87,14 +104,6 @@ export class HomePage {
     this.slides.slidePrev();
   }
 
-  addActivity() {
-    console.log("logo clicked");
-    let title = "Test title";
-    let description = "Test description";
-    let price = 99;
-    let guide = 1;
-    this.fbProvider.addActivity(title,description,price,guide);
-  }
 }
 
 export var logInButton;

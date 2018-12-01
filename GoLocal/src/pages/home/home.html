@@ -7,10 +7,12 @@
           <img src= "assets/imgs/GoLocalLogo.png" (click)="goToHome()"/>
         </ion-title></ion-col>
       <ion-col col-4></ion-col>
+
+      <ion-col col-4></ion-col>
       <ion-col col-4 text-right>
-          <button class = "about" ion-button clear (click)="goToAbout()">About Us</button>
-          <!--<button ion-button clear (click)="loginModal()"> {{ logInButton }}</button>-->
-          <button class =  "user" ion-button clear (click)="loginModal()">{{ logInButton}}</button>
+        <button class = "about" ion-button clear (click)="goToAbout()">About Us</button>
+        <button class="user" ion-button clear *ngIf="loggedIn" (click)="goToProfile()">{{ logInButton }}</button>
+        <button class="user" ion-button clear *ngIf="!loggedIn" (click)="loginModal()">{{ logInButton }}</button>
       </ion-col>
     </ion-row>
   </ion-navbar>
@@ -40,13 +42,13 @@
 
       <ion-row class="activity-row">
     
-          <div class="activity-container" *ngFor="let activity of activities" (click)="goToActivity()">
-            <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
+          <div class="activity-container" *ngFor="let activity of activitiesData" (click)="goToActivity(activity)">
+            <ion-row class="activity-header"><img src = {{activity.val.image}}/></ion-row>
             <ion-row class="activity-footer">
               <ion-item class="line">
-                {{activity.title}} <span item-end class="activity-price">${{activity.price}} CAD</span>
+                {{activity.val.title}} <span item-end class="activity-price">${{activity.val.price}} CAD</span>
               </ion-item>
-              <p>{{activity.description}}</p>
+              <p>{{activity.val.description}}</p>
             </ion-row>
           </div>
     

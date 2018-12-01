@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { FirebaseProvider } from '../../providers/firebase';
 
@@ -16,8 +17,10 @@ import { isString } from 'ionic-angular/util/util';
 })
 export class ActivityPage {
 
+  private loggedIn = false;
+  
   // To set edit mode if guide user
-  private isGuide = true;
+  private isGuide = false;
 
   // To check if new activity or editing existing one
   private newActivity = true;
@@ -27,22 +30,17 @@ export class ActivityPage {
   private editingPrice = false;
   private editingDescription = false;
 
-  // Elements of an activity
-  private title = "Activity Title";
-  private price = 0;
-  private description = "Describe the activity in more detail";
-
-  private guide = 0;
-
+  private activity_ID = "";
   private activity = {
     title: "Activity Title",
     price: 100,
-    description: "Bunch of stuff goes here"
+    description: "Bunch of stuff goes here",
+    guide: 0
   }
 
   private guideData = {
     name: "Rocky Climber",
-    subtitle: "The bestest boulderer around",
+    // subtitle: "The bestest boulderer around",
     contact: "rocky@climbeverything.com"
   }
 
@@ -51,10 +49,32 @@ export class ActivityPage {
   private days = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public modalCtrl: ModalController, public fbProvider: FirebaseProvider) {
-      // navParams.get('activity').then( data => {
-      //   this.activity = data;
-      // })
+    public modalCtrl: ModalController, public storage: Storage, public fbProvider: FirebaseProvider) {
+      let activity = navParams.get('activity');
+      let userType = navParams.get('userType');
+      this.loggedIn = navParams.get('loggedIn');
+
+      console.log("Constructing activity");
+      if (userType == 1) {
+        this.isGuide = true;
+      } else {
+        this.isGuide = false;
+      }
+
+      this.activity_ID = activity.id;
+      this.activity = activity.val;
+
+      this.fbProvider.getGuideInfo(this.activity.guide)
+      .subscribe( guide => {
+          console.log("After getting guide info:");
+          const value = guide.payload.data();
+          let data = {
+            name: value['name'],
+            contact: value['contact'],
+          }
+          this.guideData = data;
+        });
+
       for (var i=0; i<31; i++) { this.days.push(i); }
   }
 
@@ -67,10 +87,6 @@ export class ActivityPage {
     let existingAccountModal = this.modalCtrl.create(LoginPage, { });
     existingAccountModal.present()
   }
-
-  // onBook() {
-  //   this.navCtrl.setRoot(PaymentPage);
-  // }
 
   goToProfile() {
     this.navCtrl.setRoot(ProfilePage);
@@ -88,26 +104,38 @@ export class ActivityPage {
   }
 
   editDescription() {
-    this.editingPrice = true;
+    this.editingDescription = true;
   }
 
-  // Save changes to activity or add new one
+  // When booking an activity (FOR TRAVELLERS)
   onBook() {
+    if (this.loggedIn) {
+      this.navCtrl.push(PaymentPage)
+    }
+    // let ID = this.navParams.get('activity').id;
+    // this.fbProvider.bookActivity(ID,this.traveller);
+  }
+
+  // Save changes to activity or add new one (FOR GUIDES)
+  saveActivity() {
     console.log("logo clicked");
     // Convert price to integer since it is string from ion-input
-    if (isString(this.price)) {
-      this.price = parseInt(this.price);
+    if (isString(this.activity.price)) {
+      this.activity.price = parseInt(this.activity.price);
     }
     // If existing activity was clicked it will pass it forward
     // If adding new activity there will be no ID
-    let ID = this.navParams.get('activity_ID');
-    if (ID != "") {
-      console.log("Updating activity");
-      this.fbProvider.updateActivity(ID,this.title,this.description,this.price,this.guide);
-    } else {
-      console.log("Adding new activity");
-      this.fbProvider.addActivity(this.title,this.description,this.price,this.guide)
-    }
+    this.storage.get('user').then( user => {
+      let ID = this.activity_ID;
+      let guide = user.id;
+      if (ID != null) {
+        console.log("Updating activity");
+        this.fbProvider.updateActivity(ID,this.activity.title,this.activity.description,this.activity.price,guide);
+      } else {
+        console.log("Adding new activity");
+        this.activity_ID = this.fbProvider.addActivity(this.activity.title,this.activity.description,this.activity.price,guide)
+      }
+    })
 
   }
 

@@ -1,7 +1,13 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button clear (click)="backToHome()"><img width="250" height="100" src="../../assets/imgs/GoLocalLogo.png"></button>
-    <button ion-button clear (click)="backToHome()"> {{ logInButton }}</button>
+    <ion-row>
+      <button ion-button clear (click)="backToHome()"><img width="250" height="100" src="../../assets/imgs/GoLocalLogo.png"></button>
+      <ion-col col-4></ion-col>
+      <ion-col col-4 text-right>
+          <button ion-button clear *ngIf="loggedIn" (click)="goToProfile()">{{ logInButton }}</button>
+          <button ion-button clear *ngIf="!loggedIn" (click)="loginModal()"> {{ logInButton }}</button>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
 </ion-header>
 
@@ -18,6 +24,45 @@
         <ion-row><div class="bookings-current"></div></ion-row>
         <ion-row><div class="bookings-past"></div></ion-row>
     </ion-col>
-    </ion-row>
-  </ion-content>
+  </ion-row>
 
+  <ion-row>
+
+    <ion-col col-1>
+      <button ion-button *ngIf="editProfile" (click)="updateProfile()"><ion-icon name="save"></ion-icon>Save Profile</button>
+    </ion-col>
+
+    <!-- Main Content -->
+    <div> 
+      <h1> My Profile </h1> <br>
+      <h2> <div class="user-name"> {{user.name}} </div> </h2> 
+    </div>
+    <ion-col col-7 class="profile-details">
+      <ion-row class="image-row">
+        <ion-col col-4 class="image-container"></ion-col>
+        <ion-col col-4 class="image-container"></ion-col>
+        <ion-col col-4 class="image-container"></ion-col>
+        <button ion-button *ngIf="editProfile" (click)="editImages()">Edit Images<ion-icon name="create"></ion-icon></button>
+      </ion-row>
+      <ion-row class="title">
+        <ion-col col-8>
+          <ion-title *ngIf="!editingName">{{profile.name}}</ion-title>
+          <ion-input *ngIf="editingName" [(ngModel)]="profile.name"></ion-input>
+          <button ion-button *ngIf="editProfile" (click)="editName()"><ion-icon name="create"></ion-icon>Edit Name</button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <p *ngIf="!editingBio">{{profile.bio}}</p>
+        <ion-textarea *ngIf="editingBio" [(ngModel)]="profile.bio"></ion-textarea>
+        <button ion-button *ngIf="editProfile" (click)="editDescription()"><ion-icon name="create"></ion-icon>Edit Bio</button>
+      </ion-row>
+    </ion-col>
+
+    <ion-col col-1></ion-col>
+
+  </ion-row>
+      
+
+  
+</ion-content>

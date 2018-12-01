@@ -1,37 +1,59 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable, Subject } from 'rxjs-compat';
+import { switchMap } from 'rxjs/operators';
+
+import { HomePage } from '../pages/home/home';
+import { DashboardPage } from '../pages/dashboard/dashboard';
+import { AboutPage } from '../pages/about/about';
  
 @Injectable()
 export class FirebaseProvider {
  
-  constructor(public afd: AngularFireDatabase) { }
+  constructor(public afs: AngularFirestore) { }
 
   //////// USERS /////////////////
 
-  addUser(username,password,userType) {
+  logIn(navCtrl,username,password) { 
+    let query = this.afs.collection('users', 
+        ref => ref.where('username', '==', username)
+        .where('password', '==', password));
+        
+    return query;
+  }
+
+  addUser(navCtrl,username,password,userType,name,contact) {
     let user = {
       username: username,
       password: password,
+      type: userType,
+      name: name,
+      contact: contact
     }
-    if (userType == '1') {
-      this.afd.list('/user/guides').push(user);
-    } else {
-      this.afd.list('/user/travellers').push(user);
-    }
+
+    const ID = this.afs.createId();
+    this.afs.doc('/users/'+ID).set(user);
+    
+    return this.afs.doc('/users/'+ID);
   }
 
   removeUser(ID,userType) {
     if (userType == '1') {
-      this.afd.list('/user/guides').remove(ID);
+      this.afs.doc('/users/'+ID).delete();
     } else {
-      this.afd.list('/user/travellers').remove(ID);
+      this.afs.doc('/users/'+ID).delete();
     }
   }
  
   //////// ACTIVITIES ////////////
 
   getActivities() {
-    return this.afd.list('/activities/');
+    return this.afs.collection('/activities').snapshotChanges();
+  }
+
+  getGuideActivities(guide) {
+    return this.afs.collection('activities',
+        ref => ref.where('guide', '==', guide)).snapshotChanges();
   }
  
   addActivity(title,description,price,guide) {
@@ -41,7 +63,11 @@ export class FirebaseProvider {
         price: price,
         guide: guide
     }
-    this.afd.list('/activities/').push(activity);
+    const ID = this.afs.createId();
+    this.afs.doc('/activities/'+ID).set(activity);
+    alert("New activity created!");
+
+    return ID;
   }
 
   updateActivity(ID,title,description,price,guide) {
@@ -51,14 +77,31 @@ export class FirebaseProvider {
         price: price,
         guide: guide
     }
-    this.afd.object('/activities/'+ID).update(activity);
+    this.afs.doc('/activities/'+ID).update(activity);
   }
 
   bookActivity(ID,traveller) {
-    this.afd.list('/activities/'+ID).push(traveller);
+    this.afs.doc('/activities/'+ID+'/traveller').set(traveller);
   }
  
-  removeActivity(id) {
-    this.afd.list('/activities/').remove(id);
+  removeActivity(ID) {
+    this.afs.doc('/activities/'+ID).delete();
   }
+
+  //////// PROFILES ////////////
+
+  updateProfile(ID,type,name,bio) {
+
+    let profile = {
+      fullname: name,
+      bio: bio
+    }
+
+    this.afs.doc('/users/'+ID).update(profile);
+  }
+
+  getGuideInfo(ID) {
+    return this.afs.doc('/users/'+ID).snapshotChanges(); 
+  }
+
 }
