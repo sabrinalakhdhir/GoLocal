@@ -59,7 +59,7 @@ export class HomePage {
     this.activitiesDB.subscribe(actions => {
       this.activities_regular = [];
       actions.forEach(action => {
-        console.log(action);
+        console.log(action.payload.doc.data());
         const value = action.payload.doc.data();
         const id = action.payload.doc.id;
         this.addToActivityArray(id,value.category,value);
@@ -75,12 +75,12 @@ export class HomePage {
       val: activityInfo
     }
     switch (category) {
-      case 1: this.activities_cat1.push(activity); this.activities_regular.push(activity);break;
-      case 2: this.activities_cat2.push(activity); this.activities_regular.push(activity); break;
-      case 3: this.activities_cat3.push(activity); this.activities_regular.push(activity); break;
-      case 4: this.activities_cat4.push(activity); this.activities_regular.push(activity); break;
-      case 5: this.activities_cat5.push(activity); this.activities_regular.push(activity); break;
-      case 6: this.activities_cat6.push(activity); this.activities_regular.push(activity); break;
+      case 0: this.activities_cat1.push(activity); this.activities_regular.push(activity);break;
+      case 1: this.activities_cat2.push(activity); this.activities_regular.push(activity); break;
+      case 2: this.activities_cat3.push(activity); this.activities_regular.push(activity); break;
+      case 3: this.activities_cat4.push(activity); this.activities_regular.push(activity); break;
+      case 4: this.activities_cat5.push(activity); this.activities_regular.push(activity); break;
+      case 5: this.activities_cat6.push(activity); this.activities_regular.push(activity); break;
       case 99: this.activities_featured.push(activity); break;
       default: this.activities_regular.push(activity); break;
     }

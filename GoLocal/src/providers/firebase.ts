@@ -66,9 +66,10 @@ export class FirebaseProvider {
   //       ref => ref.where('category', '==', category)).snapshotChanges();
   // }
  
-  addActivity(title,description,price,guide,images) {
+  addActivity(title,category,description,price,guide,images) {
     let activity = {
         title: title,
+        category: category,
         description: description,
         price: price,
         guide: guide,
@@ -81,12 +82,14 @@ export class FirebaseProvider {
     return ID;
   }
 
-  updateActivity(ID,title,description,price,guide) {
+  updateActivity(ID,title,category,description,price,guide,images) {
     let activity = {
         title: title,
+        category: parseInt(category),
         description: description,
         price: price,
-        guide: guide
+        guide: guide,
+        images: images
     }
     this.afs.doc('/activities/'+ID).update(activity);
   }

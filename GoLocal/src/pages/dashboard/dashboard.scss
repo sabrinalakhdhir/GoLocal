@@ -17,7 +17,14 @@ page-dashboard {
     	margin-left: auto;
     	margin-right: auto;
 
-    }
+	}
+	
+	& .logo { 
+		width: 200px;
+		height: 50px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		}
 
 	////// Main BODY /////////
 
@@ -45,12 +52,7 @@ page-dashboard {
     	padding: 0px $body-padding;
     }
 
-    & .logo { 
-    width: 200px;
-    height: 50px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    }
+    
 
     & .activity-row {
     	padding: 0px $body-padding;

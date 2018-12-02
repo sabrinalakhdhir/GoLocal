@@ -40,12 +40,16 @@ export class ActivityPage {
   private editingPrice = false;
   private editingDescription = false;
 
+  // Store and list of categories
+  private categories = ["Food","Scenic","Music","Active","Casual","Night"];
+
   private activity_ID = "";
   private activity = {
     title: "Activity Title",
     price: 100,
     description: "Bunch of stuff goes here",
-    guide: 0
+    guide: 0,
+    category: -1
   }
 
   private guideData = {
@@ -154,10 +158,10 @@ export class ActivityPage {
       let guide = user.id;
       if (ID != null) {
         console.log("Updating activity");
-        this.fbProvider.updateActivity(ID,this.activity.title,this.activity.description,this.activity.price,guide);
+        this.fbProvider.updateActivity(ID,this.activity.title,this.activity.category,this.activity.description,this.activity.price,guide,this.imageQueue);
       } else {
         console.log("Adding new activity");
-        this.activity_ID = this.fbProvider.addActivity(this.activity.title,this.activity.description,this.activity.price,guide,this.imageQueue)
+        this.activity_ID = this.fbProvider.addActivity(this.activity.title,this.activity.category,this.activity.description,this.activity.price,guide,this.imageQueue)
       }
     })
 

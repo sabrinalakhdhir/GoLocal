@@ -44,10 +44,11 @@ export class DashboardPage {
       // Get list from Firestore
       this.activitiesDB = this.fbProvider.getGuideActivities(guideID);
       // Convert Firestore object to normal object
-      this.activitiesDB.subscribe(actions => {
-        actions.forEach(action => {
-          const value = action.payload.doc.data();
-          const id = action.payload.doc.id;
+      this.activitiesDB.subscribe(activities => {
+        activities.forEach(activity => {
+          console.log(activity.payload.doc.data());
+          const value = activity.payload.doc.data();
+          const id = activity.payload.doc.id;
           this.activitiesData.push({
             id: id,
             val: value
