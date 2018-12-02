@@ -7,8 +7,10 @@ page-activity {
     & .image-container {
         padding: 10px;
         height: 250px;
-        border: 3px solid black;
+        border: 0px solid black;
         border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 
         & .drop-zone {
             background: lightgrey;
@@ -17,10 +19,16 @@ page-activity {
         }
     }
 
+        & .upload {
+            padding: 10px;
+        }
+
     & .guide-sidebar {
 
         padding: 20px;
-        border: 3px solid black;
+        border: 1px solid black;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
         & .guide-image {
             margin-left: auto;
@@ -47,6 +55,12 @@ page-activity {
 
         & .guide-contact {
             font-style: italic;
+        }
+
+        & .guide-booking{
+            display: flex;
+            justify-content: center;
+            align-items: centre;
         }
 
 
