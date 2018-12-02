@@ -22,10 +22,37 @@
     <!-- Main Content -->
     <ion-col col-7 class="activity-details">
       <ion-row class="image-row">
+          <div class="col-md-3">
+            <!-- <div ng2FileDrop
+                  [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                  (fileOver)="fileOverBase($event)"
+                  [uploader]="uploader"
+                  class="well my-drop-zone">
+                Base drop zone
+            </div>
+
+            <div ng2FileDrop
+                  [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                  (fileOver)="fileOverAnother($event)"
+                  [uploader]="uploader"
+                  class="well my-drop-zone">
+                Another drop zone
+            </div> -->
+        </div>
+        <ion-col col-4 class="image-container">
+            <div ng2FileDrop
+            [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+            (fileOver)="fileOverBase($event)"
+            [uploader]="uploader"
+            class="drop-zone">
+              Base drop zone
+          </div>
+        </ion-col>
         <ion-col col-4 class="image-container"></ion-col>
         <ion-col col-4 class="image-container"></ion-col>
-        <ion-col col-4 class="image-container"></ion-col>
-        <button ion-button *ngIf="isGuide" (click)="editImages()">Edit Images<ion-icon name="create"></ion-icon></button>
+          <span>Upload images: </span>
+          <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+        <!-- <button ion-button *ngIf="isGuide" (click)="editImages()">Edit Images<ion-icon name="create"></ion-icon></button> -->
       </ion-row>
       <ion-row class="title">
         <ion-col col-8>

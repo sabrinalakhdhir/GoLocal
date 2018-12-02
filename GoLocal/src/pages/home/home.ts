@@ -58,14 +58,18 @@ export class HomePage {
         console.log(action);
         const value = action.payload.doc.data();
         const id = action.payload.doc.id;
-        this.addToActivityArray(value.category,value);
+        this.addToActivityArray(id,value.category,value);
       });
     })
     console.log(this.activities_regular);
     console.log(this.activities_featured);
   }
 
-  addToActivityArray(category,activity) {
+  addToActivityArray(id,category,activityInfo) {
+    let activity = {
+      id: id,
+      val: activityInfo
+    }
     switch (category) {
       case 1: this.activities_cat1.push(activity); this.activities_regular.push(activity);break;
       case 2: this.activities_cat2.push(activity); this.activities_regular.push(activity); break;
@@ -130,7 +134,8 @@ export class HomePage {
     this.navCtrl.push(ActivityPage, {
       loggedIn: this.loggedIn,
       userType: 0, 
-      activity: activity });
+      activity: activity,
+    });
   }
 
   goToProfile() {
