@@ -139,6 +139,10 @@ page-activity {
             display: flex;
             justify-content: center;
             align-items: centre;
+
+            & .save{
+                z-index: 100;
+            }
         }
 
 
