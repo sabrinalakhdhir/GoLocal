@@ -49,11 +49,15 @@ export class HomePage {
   private activities_cat5 = [];
   private activities_cat6 = [];
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public fbProvider: FirebaseProvider, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,
+     public fbProvider: FirebaseProvider, public navParams: NavParams) {
+    
+    this.loggedIn = this.navParams.get('loggedIn');
     // Get list from Firestore
     this.activitiesDB = this.fbProvider.getActivities();
     // Convert Firestore object to normal object
     this.activitiesDB.subscribe(actions => {
+      this.activities_regular = [];
       actions.forEach(action => {
         console.log(action);
         const value = action.payload.doc.data();

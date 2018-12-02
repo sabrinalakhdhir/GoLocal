@@ -33,7 +33,7 @@
             </div> -->
         </ion-col>
       </ion-row>
-      <ion-row class="upload-images">
+      <ion-row class="upload-images" *ngIf="isGuide">
           <span>Upload images: </span>
           <input type="file" ng2FileSelect [uploader]="uploader" (change)="onUpload()" multiple  /><br/>
       </ion-row>

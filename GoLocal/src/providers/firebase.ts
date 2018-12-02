@@ -58,7 +58,7 @@ export class FirebaseProvider {
 
   getUserActivities(user) {
     return this.afs.collection('activities',
-        ref => ref.where('user', '==', user)).snapshotChanges();
+        ref => ref.where('traveller', '==', user)).snapshotChanges();
   }
 
   // getCategoryActivities(category) {
@@ -92,7 +92,8 @@ export class FirebaseProvider {
   }
 
   bookActivity(ID,traveller) {
-    this.afs.doc('/activities/'+ID+'/traveller').set(traveller);
+    this.afs.doc('/activities/'+ID).update({traveller:traveller});
+    alert("Activity successfully booked!");
   }
  
   removeActivity(ID) {
@@ -101,11 +102,12 @@ export class FirebaseProvider {
 
   //////// PROFILES ////////////
 
-  updateProfile(ID,type,name,bio) {
+  updateProfile(ID,name,bio,image) {
 
     let profile = {
       fullname: name,
-      bio: bio
+      bio: bio,
+      image: image
     }
 
     this.afs.doc('/users/'+ID).update(profile);

@@ -20,7 +20,15 @@
       </ion-row>
   <ion-row>
     <ion-col col-4 class="user">
-        <ion-row><div class="user-image"></div></ion-row>
+        <ion-row>
+          <div class="user-image" [style.background-image]="'url('+profileImage+')'" background-size="contain">
+            <!-- <img src="{{profileImage}}" /> -->
+          </div>
+        </ion-row>
+        <ion-row class="upload-images">
+          <span>Upload images: </span>
+          <input type="file" ng2FileSelect [uploader]="uploader" (change)="onUpload()" /><br/>
+      </ion-row>
     </ion-col>
 
     <!-- Main Content -->
@@ -30,7 +38,6 @@
         <ion-col col-4 class="image-container"></ion-col>
         <ion-col col-4 class="image-container"></ion-col>
         <ion-col col-4 class="image-container"></ion-col>
-        <button ion-button *ngIf="editProfile" (click)="editImages()">Edit Images<ion-icon name="create"></ion-icon></button>
       </ion-row>
       <ion-row class="title">
         <ion-col col-8>
@@ -58,7 +65,7 @@
               <p class="no-activities" *ngIf="activities_user.length <= 0">No activities currently booked</p>
               <ion-row class="activity-row">
                   <div class="activity-container" *ngFor="let activity of activities_user" (click)="goToActivity(activity)">
-                    <ion-row class="activity-header"><img src = {{activity.image}}/></ion-row>
+                    <ion-row class="activity-header"><img src = {{activity.images[0].file}}/></ion-row>
                     <ion-row class="activity-footer">
                       <ion-item class="line" text-wrap>
                         {{activity.title}} <span item-end class="activity-price">${{activity.price}} CAD</span>
