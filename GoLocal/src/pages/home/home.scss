@@ -8,14 +8,19 @@ page-home {
         left: 0px;
         top: 0px;
         width: 100%;
-        height: 100%;
+        height: 400px;
+    }
+
+    & ion-slides {
+        height: 400px;
     }
 
     & .cover-logo {
     	position: relative;
-    	width: 90%;
+        width: 50%;
         right: 10%;
         bottom: 10%;
+        left: 3%;
     	margin-left: auto;
     	margin-right: auto;
 
@@ -31,13 +36,12 @@ page-home {
     }
 
     & .logo { 
-    position: absolute;
-    width: 200px;
-    height: 50px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    top: -18px;
-    left: -30px;
+        position: absolute;
+        width: 150px;
+        height: 50px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        top: -18px;
     }
 
     & .about { 
