@@ -134,8 +134,8 @@
 
       <ion-row class = "guide-booking">
         <button ion-button *ngIf="!isGuide" (click)="onBook()">Book Now</button>
-        <button ion-button *ngIf="isGuide" (click)="saveActivity()"><ion-icon name="save"></ion-icon>Save Activity</button>
-        <button ion-button *ngIf="isGuide" color="danger" (click)="deleteActivity()"><ion-icon name="save"></ion-icon>Delete Activity</button>
+        <button ion-button icon-start *ngIf="isGuide" (click)="saveActivity()"><ion-icon name="checkmark"></ion-icon>Save</button>
+        <button ion-button icon-start *ngIf="isGuide" color="danger" (click)="deleteActivity()"><ion-icon name="close"></ion-icon>Delete</button>
       </ion-row>
     </ion-col>
 
