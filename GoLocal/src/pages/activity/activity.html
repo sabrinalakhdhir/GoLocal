@@ -23,7 +23,8 @@
     <ion-col col-7 class="activity-details">
       <ion-row class="image-row">
         <ion-col col-4 class="image-container" *ngFor="let image of imageQueue">
-          <img src="{{image.file}}" />
+          <div class = "container" >
+          <img class = "activity-image" src="{{image.file}}" />
             <!-- <div ng2FileDrop
               [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
               (fileOver)="fileOverBase($event)"
@@ -31,6 +32,7 @@
               class="drop-zone">
                 Base drop zone
             </div> -->
+          </div>
         </ion-col>
       </ion-row>
       <ion-row class="upload-images" *ngIf="isGuide">
@@ -38,20 +40,22 @@
           <input type="file" ng2FileSelect [uploader]="uploader" (change)="onUpload()" multiple  /><br/>
       </ion-row>
 
-      <ion-row class="title">
+      <ion-row>
         <ion-col col-8>
+          <ion-item class = "title">
           <ion-title *ngIf="!editingTitle">{{activity.title}}</ion-title>
           <ion-input *ngIf="editingTitle" [(ngModel)]="activity.title"></ion-input>
+          </ion-item>
           <button ion-button *ngIf="isGuide" (click)="editTitle()"><ion-icon name="create"></ion-icon>Edit Title</button>
         </ion-col>
-        <ion-col col-4>
+        <ion-col col-4 class = "price">
           <ion-title *ngIf="!editingPrice">$ {{activity.price}}</ion-title>
           <ion-input *ngIf="editingPrice" [(ngModel)]="activity.price"></ion-input>
           <button ion-button *ngIf="isGuide" (click)="editPrice()"><ion-icon name="create"></ion-icon>Edit Price</button>
         </ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row class = description>
         <p *ngIf="!editingDescription">{{activity.description}}</p>
         <ion-textarea *ngIf="editingDescription" [(ngModel)]="activity.description"></ion-textarea>
         <button ion-button *ngIf="isGuide" (click)="editDescription()"><ion-icon name="create"></ion-icon>Edit Description</button>

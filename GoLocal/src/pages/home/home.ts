@@ -100,17 +100,17 @@ export class HomePage {
     this.categorySelected = category;
     switch (category) {
       case 1: this.activities_category = this.activities_cat1;
-              this.categoryHeading = "First"; break;
+              this.categoryHeading = "Food"; break;
       case 2: this.activities_category = this.activities_cat2;
-              this.categoryHeading = "Second"; break;
+              this.categoryHeading = "Scenic"; break;
       case 3: this.activities_category = this.activities_cat3;
-              this.categoryHeading = "Third"; break;
+              this.categoryHeading = "Music"; break;
       case 4: this.activities_category = this.activities_cat4;
-              this.categoryHeading = "Fourth"; break;
+              this.categoryHeading = "Active"; break;
       case 5: this.activities_category = this.activities_cat5;
-              this.categoryHeading = "Fifth"; break;
+              this.categoryHeading = "Casual"; break;
       case 6: this.activities_category = this.activities_cat6;
-              this.categoryHeading = "Sixth"; break;
+              this.categoryHeading = "Night"; break;
       default: this.activities_category = [];
               this.categoryHeading = ""; break;
     }
