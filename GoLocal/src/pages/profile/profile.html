@@ -1,15 +1,17 @@
 <ion-header>
-  <ion-navbar>
-    <ion-row>
-      <button ion-button clear (click)="backToHome()"><img width="250" height="100" src="../../assets/imgs/GoLocalLogo.png"></button>
-      <ion-col col-4></ion-col>
-      <ion-col col-4 text-right>
-          <button ion-button clear *ngIf="loggedIn" (click)="goToProfile()">{{ logInButton }}</button>
-          <button ion-button clear *ngIf="!loggedIn" (click)="loginModal()"> {{ logInButton }}</button>
-      </ion-col>
-    </ion-row>
-  </ion-navbar>
-</ion-header>
+    <ion-navbar>
+      <ion-row>
+        <ion-col col-4 text-left>
+          <ion-title class = "logo">
+            <img src= "assets/imgs/GoLocalLogo.png" />
+          </ion-title></ion-col>
+        <ion-col col-4></ion-col>
+        <ion-col col-4 text-right>
+            <button ion-button clear *ngIf="loggedIn" (click)="goToProfile()">{{ logInButton }}</button>
+            <button ion-button clear *ngIf="!loggedIn" (click)="loginModal()"> {{ logInButton }}</button>      </ion-col>
+      </ion-row>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content padding>
     <ion-row>

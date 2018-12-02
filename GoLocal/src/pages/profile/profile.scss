@@ -1,4 +1,13 @@
 page-profile {
+
+    & .logo { 
+        position: absolute;
+        width: 150px;
+        height: 50px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
     & .user {
 
         padding: 20px;

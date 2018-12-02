@@ -28,13 +28,6 @@ page-home {
 
     }
 
-    //////// Main BODY ////////////
-    $body-padding: 50px;
-
-    & .heading {
-    	padding-left: $body-padding;
-    }
-
     & .logo { 
         position: absolute;
         width: 150px;
@@ -44,6 +37,15 @@ page-home {
         top: -18px;
     }
 
+
+    //////// Main BODY ////////////
+    $body-padding: 50px;
+
+    & .heading {
+    	padding-left: $body-padding;
+    }
+
+    
     & .about { 
     position: absolute;
     right: 250px;
@@ -64,19 +66,28 @@ page-home {
 
             & .category {
                 $category-size: 105px;
+                padding: 20px 25px;
                 margin-left: auto;
                 margin-right: auto;
                 height: $category-size;
                 width: $category-size;
                 border-radius: $category-size/2;
-                background: orange;
+                background: black;
+                color: white;
                 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+                & ion-icon {
+                    font-size: 5em;
+                    color: white;
+                }
             }
 
             & .cat-text {
                 text-align: center;
-                font-size: 1.5em;
+                font-size: 1.7em;
+                font-weight: 200;
+                margin-left: auto;
+                margin-right: auto;
             }
             
         }
