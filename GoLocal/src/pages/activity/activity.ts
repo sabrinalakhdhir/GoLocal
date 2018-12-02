@@ -3,8 +3,6 @@ import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { FileUploader } from 'ng2-file-upload';
-import { ImagePicker } from '@ionic-native/image-picker';
-import { Base64 } from '@ionic-native/base64';
 
 import { FirebaseProvider } from '../../providers/firebase';
 import { FirebaseApp } from 'angularfire2';
@@ -62,7 +60,6 @@ export class ActivityPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, public storage: Storage, 
-    private imagePicker: ImagePicker, private base64: Base64,
     public fbProvider: FirebaseProvider, private fbApp: FirebaseApp, private afs: AngularFirestore) {
 
       console.log("Constructing activity");
@@ -81,8 +78,8 @@ export class ActivityPage {
       // Set local variables to activity info
       this.activity_ID = activity.id;
       this.activity = activity.val;
-      if (activity.images) {
-        this.imageQueue = activity.images;
+      if (activity.val.images) {
+        this.imageQueue = activity.val.images;
       }
 
       this.fbProvider.getGuideInfo(this.activity.guide)
@@ -92,6 +89,7 @@ export class ActivityPage {
           let data = {
             name: value['name'],
             contact: value['contact'],
+            image: value['image']
           }
           this.guideData = data;
         });
@@ -115,8 +113,6 @@ export class ActivityPage {
 
   // Edit functions
 
-  editImages() {}
-
   editTitle() {
     this.editingTitle = true;
   }
@@ -131,8 +127,14 @@ export class ActivityPage {
 
   // When booking an activity (FOR TRAVELLERS)
   onBook() {
+    console.log("Book clicked");
     if (this.loggedIn) {
-      this.navCtrl.push(PaymentPage)
+      console.log(this.activity);
+      this.navCtrl.push(PaymentPage, {
+        ID: this.activity_ID,
+        activity: this.activity,
+        guide: this.guideData
+      });
     }
     // let ID = this.navParams.get('activity').id;
     // this.fbProvider.bookActivity(ID,this.traveller);
@@ -181,7 +183,6 @@ export class ActivityPage {
           let imageURL = event['target']['result'];
           var image = {
             file: imageURL,
-            user: "user"
           };
           this.imageQueue.push(image);
         };
@@ -193,8 +194,7 @@ export class ActivityPage {
       alert("Too many images. Can only upload 3 per activity");
       this.uploader.clearQueue();
     }
-    
-
+  
   }
 
 }

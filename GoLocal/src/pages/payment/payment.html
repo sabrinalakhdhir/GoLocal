@@ -3,7 +3,7 @@
     <ion-row>
       <ion-col col-4 text-left><ion-title>GoLocal</ion-title></ion-col>
       <ion-col col-4></ion-col>
-      <ion-col col-4 text-right><ion-title>User</ion-title></ion-col>
+      <ion-col col-4 text-right></ion-col>
     </ion-row>
   </ion-navbar>
 </ion-header>
@@ -71,18 +71,18 @@
 
     <ion-col col-3 class="activity-sidebar">
       <div class="activity-info">
-        <ion-row><div class="activity-image"></div></ion-row>
+        <ion-row><div class="activity-image" [style.background-image]="'url('+activity.images[0].file+')'"></div></ion-row>
         <ion-row><div class="activity-title">{{activity.title}}</div></ion-row>
-        <ion-row><div class="activity-date">{{activity.date}}</div></ion-row>
-        <ion-row><div class="activity-time">{{activity.time}}</div></ion-row>
+        <!-- <ion-row><div class="activity-date">{{activity.date}}</div></ion-row> -->
+        <!-- <ion-row><div class="activity-time">{{activity.time}}</div></ion-row> -->
         <ion-row><div class="activity-price">${{activity.price}}</div></ion-row>
         <ion-row><div class="activity-guide">{{activity.guide}}</div></ion-row>
       </div>
       
 
       <ion-row>
-        <ion-col col-6><button ion-button>Cancel</button></ion-col>
-        <ion-col col-6><button ion-button>Confirm</button></ion-col>
+        <ion-col col-6><button ion-button (click)="onCancel()">Cancel</button></ion-col>
+        <ion-col col-6><button ion-button (click)="onConfirm()">Confirm</button></ion-col>
       </ion-row>
     </ion-col>
 

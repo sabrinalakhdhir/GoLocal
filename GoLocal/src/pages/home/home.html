@@ -62,7 +62,7 @@
 
       <ion-row class="activity-row">
           <div class="activity-container" *ngFor="let activity of activities_featured" (click)="goToActivity(activity)">
-            <ion-row class="activity-header"><img src = {{activity.val.image}}/></ion-row>
+            <ion-row class="activity-header"><img src = {{activity.val.images[0].file}}/></ion-row>
             <ion-row class="activity-footer">
               <ion-item class="line" text-wrap>
                 {{activity.val.title}} <span item-end class="activity-price">${{activity.val.price}} </span>
@@ -80,8 +80,8 @@
   <ion-row class="category-row">
 
       <ion-row class="activity-row">
-          <div class="activity-container" *ngFor="let activity of activities_regular" (click)="goToActivity()">
-            <ion-row class="activity-header"><img src = {{activity.val.image}}/></ion-row>
+          <div class="activity-container" *ngFor="let activity of activities_regular" (click)="goToActivity(activity)">
+            <ion-row class="activity-header"><img src = {{activity.val.images[0].file}}/></ion-row>
             <ion-row class="activity-footer">
               <ion-item class="line" text-wrap>
                 {{activity.val.title}} <span item-end class="activity-price">${{activity.val.price}} </span>

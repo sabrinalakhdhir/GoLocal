@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
+import { FileUploader } from 'ng2-file-upload';
+
 import { FirebaseProvider } from '../../providers/firebase';
 
 import { HomePage } from '../home/home';
@@ -11,6 +13,12 @@ import { HomePage } from '../home/home';
   templateUrl: 'profile.html'
 })
 export class ProfilePage {
+
+  public uploader:FileUploader = new FileUploader({
+    url: "",
+    autoUpload: true
+  });
+  private profileImage = "";
 
   private editProfile = false;
 
@@ -29,8 +37,9 @@ export class ProfilePage {
     // Check if user has stored profile details to display
     this.storage.get('user').then( user => {
       console.log(user);
-      if (user.val.name) {
+      if (user.val.image) {
         this.profile.name = user.val.name;
+        this.profileImage = user.val.image;
         if (user.val.bio) {
           this.profile.bio = user.val.bio;
         } else {
@@ -42,7 +51,6 @@ export class ProfilePage {
         actions.forEach(action => {
           console.log(action);
           const value = action.payload.doc.data();
-          const id = action.payload.doc.id;
           this.activities_user.push(value)
         });
       })
@@ -53,11 +61,43 @@ export class ProfilePage {
     this.navCtrl.setRoot(HomePage);
   }
 
+  // When saving profile
   updateProfile() {
     this.storage.get('user').then( user => {
       let ID = user.id;
-      let type = user.val.type;
-      this.fbProvider.updateProfile(ID,type,this.profile.name,this.profile.bio);
+      let image = this.profileImage
+      this.fbProvider.updateProfile(ID,this.profile.name,this.profile.bio,image);
     })
+  }
+
+  // Upload images
+  onUpload() {
+    console.log("Upload images clicked");
+
+    let queue = this.uploader.queue;
+    console.log(queue);
+
+
+    if (queue.length <= 1) {
+      queue.forEach( file => {
+        const fileData = file._file;
+        console.log(fileData.name);
+
+        var fileReader = new FileReader();
+
+        fileReader.onload = (event) => {
+          console.log(event);
+          let imageURL = event['target']['result'];
+          this.profileImage = imageURL;
+        };
+
+        fileReader.readAsDataURL(fileData);
+  
+      });  
+    } else {
+      alert("Too many images. Can only upload 3 per activity");
+      this.uploader.clearQueue();
+    }
+  
   }
 }
