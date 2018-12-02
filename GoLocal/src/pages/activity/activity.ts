@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
+import { FileUploader } from 'ng2-file-upload';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Base64 } from '@ionic-native/base64';
+
 import { FirebaseProvider } from '../../providers/firebase';
 
 import { AboutPage } from '../about/about';
@@ -16,6 +20,8 @@ import { isString } from 'ionic-angular/util/util';
   templateUrl: 'activity.html'
 })
 export class ActivityPage {
+
+  public uploader:FileUploader = new FileUploader({url: ""});
 
   private loggedIn = false;
   
@@ -49,7 +55,10 @@ export class ActivityPage {
   private days = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public modalCtrl: ModalController, public storage: Storage, public fbProvider: FirebaseProvider) {
+    public modalCtrl: ModalController, public storage: Storage, 
+    private imagePicker: ImagePicker,
+    private base64: Base64, public fbProvider: FirebaseProvider) {
+
       let activity = navParams.get('activity');
       let userType = navParams.get('userType');
       this.loggedIn = navParams.get('loggedIn');
@@ -77,7 +86,7 @@ export class ActivityPage {
 
       for (var i=0; i<31; i++) { this.days.push(i); }
   }
-
+ 
   createAccountModal() {
     let createNewModal = this.modalCtrl.create(CreateAccountPage, { });
     createNewModal.present()

@@ -60,8 +60,10 @@ page-home {
 
             & .category {
                 $category-size: 105px;
-
+                margin-left: auto;
+                margin-right: auto;
                 height: $category-size;
+                width: $category-size;
                 border-radius: $category-size/2;
                 background: orange;
             }
