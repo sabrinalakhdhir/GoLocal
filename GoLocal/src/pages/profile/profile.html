@@ -15,8 +15,8 @@
 
 <ion-content padding>
     <ion-row>
-        <ion-col col-9 text-left><h1>My Profile</h1></ion-col>
-        <ion-col col-3>
+        <ion-col col-10 text-left><h1>My Profile</h1></ion-col>
+        <ion-col col-2>
           <button ion-button *ngIf="editProfile" (click)="updateProfile()"><ion-icon name="save" float-right></ion-icon>Save Profile</button>
         </ion-col>
       </ion-row>
@@ -35,7 +35,7 @@
 
     <!-- Main Content -->
     
-    <ion-col col-7 class="profile-details">
+    <ion-col col-8 class="profile-details">
       <ion-row class="image-row">
         <ion-col col-4 class="image-container"></ion-col>
         <ion-col col-4 class="image-container"></ion-col>
@@ -43,16 +43,23 @@
       </ion-row>
       <ion-row class="title">
         <ion-col col-8>
-          <ion-title *ngIf="!editingName">{{profile.name}}</ion-title>
-          <ion-input *ngIf="editingName" [(ngModel)]="profile.name"></ion-input>
-          <button ion-button *ngIf="editProfile" (click)="editName()"><ion-icon name="create"></ion-icon>Edit Name</button>
+          <div class="name" *ngIf="!editingName" float-left>{{profile.name}}</div>
+          <div class="name" float-left><ion-input *ngIf="editingName" [(ngModel)]="profile.name"></ion-input></div>
+          <div float-right>
+            <button ion-button *ngIf="editProfile" (click)="editName()"><ion-icon name="create"></ion-icon></button>
+          </div>
         </ion-col>
       </ion-row>
 
       <ion-row>
-        <p *ngIf="!editingBio">{{profile.bio}}</p>
-        <ion-textarea *ngIf="editingBio" [(ngModel)]="profile.bio"></ion-textarea>
-        <button ion-button *ngIf="editProfile" (click)="editBio()"><ion-icon name="create"></ion-icon>Edit Bio</button>
+        <ion-col col-10>
+            <p class="bio" *ngIf="!editingBio">{{profile.bio}}</p>
+            <ion-textarea class="bio" *ngIf="editingBio" [(ngModel)]="profile.bio"></ion-textarea>
+        </ion-col>
+        <ion-col col-2>
+            <button ion-button *ngIf="editProfile" (click)="editBio()"><ion-icon name="create"></ion-icon></button>
+        </ion-col>
+        
       </ion-row>
 
 
