@@ -81,8 +81,8 @@ export class ActivityPage {
       // Set local variables to activity info
       this.activity_ID = activity.id;
       this.activity = activity.val;
-      if (activity.images) {
-        this.imageQueue = activity.images;
+      if (activity.val.images) {
+        this.imageQueue = activity.val.images;
       }
 
       this.fbProvider.getGuideInfo(this.activity.guide)
