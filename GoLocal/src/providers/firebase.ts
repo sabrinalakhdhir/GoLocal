@@ -66,12 +66,13 @@ export class FirebaseProvider {
   //       ref => ref.where('category', '==', category)).snapshotChanges();
   // }
  
-  addActivity(title,description,price,guide) {
+  addActivity(title,description,price,guide,images) {
     let activity = {
         title: title,
         description: description,
         price: price,
-        guide: guide
+        guide: guide,
+        images: images
     }
     const ID = this.afs.createId();
     this.afs.doc('/activities/'+ID).set(activity);

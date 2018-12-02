@@ -7,6 +7,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { Base64 } from '@ionic-native/base64';
 
 import { FirebaseProvider } from '../../providers/firebase';
+import { FirebaseApp } from 'angularfire2';
 
 import { AboutPage } from '../about/about';
 import { ProfilePage } from '../profile/profile';
@@ -14,6 +15,7 @@ import { CreateAccountPage } from '../createAccount/createAccount';
 import { LoginPage } from '../login/login';
 import { PaymentPage } from '../payment/payment';
 import { isString } from 'ionic-angular/util/util';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'page-activity',
@@ -21,7 +23,11 @@ import { isString } from 'ionic-angular/util/util';
 })
 export class ActivityPage {
 
-  public uploader:FileUploader = new FileUploader({url: ""});
+  public uploader:FileUploader = new FileUploader({
+    url: "",
+    autoUpload: true
+  });
+  private imageQueue = [];
 
   private loggedIn = false;
   
@@ -56,22 +62,28 @@ export class ActivityPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController, public storage: Storage, 
-    private imagePicker: ImagePicker,
-    private base64: Base64, public fbProvider: FirebaseProvider) {
+    private imagePicker: ImagePicker, private base64: Base64,
+    public fbProvider: FirebaseProvider, private fbApp: FirebaseApp, private afs: AngularFirestore) {
 
+      console.log("Constructing activity");
+      // Get data about activity from previous page
       let activity = navParams.get('activity');
       let userType = navParams.get('userType');
       this.loggedIn = navParams.get('loggedIn');
 
-      console.log("Constructing activity");
+      // Check if guide or not to turn on editing
       if (userType == 1) {
         this.isGuide = true;
       } else {
         this.isGuide = false;
       }
 
+      // Set local variables to activity info
       this.activity_ID = activity.id;
       this.activity = activity.val;
+      if (activity.images) {
+        this.imageQueue = activity.images;
+      }
 
       this.fbProvider.getGuideInfo(this.activity.guide)
       .subscribe( guide => {
@@ -102,6 +114,7 @@ export class ActivityPage {
   }
 
   // Edit functions
+
   editImages() {}
 
   editTitle() {
@@ -142,9 +155,45 @@ export class ActivityPage {
         this.fbProvider.updateActivity(ID,this.activity.title,this.activity.description,this.activity.price,guide);
       } else {
         console.log("Adding new activity");
-        this.activity_ID = this.fbProvider.addActivity(this.activity.title,this.activity.description,this.activity.price,guide)
+        this.activity_ID = this.fbProvider.addActivity(this.activity.title,this.activity.description,this.activity.price,guide,this.imageQueue)
       }
     })
+
+  }
+
+  // Upload images
+  onUpload() {
+    console.log("Upload images clicked");
+
+    let queue = this.uploader.queue;
+    console.log(queue);
+
+
+    if (queue.length <= 3) {
+      queue.forEach( file => {
+        const fileData = file._file;
+        console.log(fileData.name);
+
+        var fileReader = new FileReader();
+
+        fileReader.onload = (event) => {
+          console.log(event);
+          let imageURL = event['target']['result'];
+          var image = {
+            file: imageURL,
+            user: "user"
+          };
+          this.imageQueue.push(image);
+        };
+
+        fileReader.readAsDataURL(fileData);
+  
+      });  
+    } else {
+      alert("Too many images. Can only upload 3 per activity");
+      this.uploader.clearQueue();
+    }
+    
 
   }
 

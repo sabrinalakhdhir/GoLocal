@@ -112,8 +112,6 @@ export class HomePage {
     }
   }
 
-
-
   /////// Accounts /////////
 
   createAccountModal() {
