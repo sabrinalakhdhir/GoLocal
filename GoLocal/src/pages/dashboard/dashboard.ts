@@ -22,17 +22,11 @@ export class DashboardPage {
 
   private username;
 
-  private activities = [
-    { image: "assets/imgs/1.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
-    { image: "assets/imgs/2.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
-    { image: "assets/imgs/3.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
-    { image: "assets/imgs/4.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
-    { image: "assets/imgs/5.jpg", title: 'Activity ', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
-    { image: "assets/imgs/GoLocalLogo.png", title: 'Activity', price: 100, description: 'This is a kind of activity description with all the things that you can do!' },
-  ];
+  private activitiesDBAll;
+  private activitiesDBBooked;
 
-  private activitiesDB;
   private activitiesData = [];
+  private activitiesBooked = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,  public fbProvider: FirebaseProvider, public storage: Storage, public navParams: NavParams) {
     this.username = this.navParams.get('name')
@@ -41,21 +35,34 @@ export class DashboardPage {
     this.storage.get('user').then( user => {
       let guideID = user.id;
       console.log(guideID);
-      // Get list from Firestore
-      this.activitiesDB = this.fbProvider.getGuideActivities(guideID);
+
+      // Get all guide's activities from Firestore
+      this.activitiesDBAll = this.fbProvider.getGuideActivities(guideID);
       // Convert Firestore object to normal object
-      this.activitiesDB.subscribe(activities => {
+      this.activitiesDBAll.subscribe(activities => {
+        this.activitiesData = [];
+        this.activitiesBooked = [];
         activities.forEach(activity => {
           console.log(activity.payload.doc.data());
           const value = activity.payload.doc.data();
           const id = activity.payload.doc.id;
-          this.activitiesData.push({
-            id: id,
-            val: value
-          });
+          let traveller = value['traveller'];
+          if (traveller) {
+            this.activitiesBooked.push({
+              id: id,
+              val: value
+            });
+          } else {
+            this.activitiesData.push({
+              id: id,
+              val: value
+            });
+          }
+          
         });
       })
       console.log(this.activitiesData);
+      
     })
     
   }

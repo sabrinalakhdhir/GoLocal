@@ -52,7 +52,7 @@
       <ion-row>
         <p *ngIf="!editingBio">{{profile.bio}}</p>
         <ion-textarea *ngIf="editingBio" [(ngModel)]="profile.bio"></ion-textarea>
-        <button ion-button *ngIf="editProfile" (click)="editDescription()"><ion-icon name="create"></ion-icon>Edit Bio</button>
+        <button ion-button *ngIf="editProfile" (click)="editBio()"><ion-icon name="create"></ion-icon>Edit Bio</button>
       </ion-row>
 
 

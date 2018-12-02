@@ -112,6 +112,7 @@
       <ion-row><div class="guide-name">{{guideData.name}}</div></ion-row>
       <!-- <ion-row><div class="guide-subtitle">{{guideData.subtitle}}</div></ion-row> -->
       <ion-row><div class="guide-contact">{{guideData.contact}}</div></ion-row>
+      <ion-row><div class="guide-bio">{{guideData.bio}}</div></ion-row>
       <ion-row class = "guide-booking" *ngIf="!isGuide">
         <p>Start Date</p>
         <ion-select [(ngModel)]="start-month" interface="popover" placeholder="month">

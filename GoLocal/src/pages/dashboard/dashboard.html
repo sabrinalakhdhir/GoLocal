@@ -22,6 +22,30 @@
       <button ion-button (click)="addActivity()">+ Add New Activity</button>
     </ion-col>
   </ion-row>
+
+  <!-- Upcoming bookings -->
+  <ion-item class = "heading">
+    <h1>Upcoming Bookings</h1>
+  </ion-item>
+  <ion-row class="category-row">
+      <div class="actvities-empty" *ngIf="activitiesData.length < 1">No activities currently booked</div>
+      <ion-row class="activity-row">
+    
+          <div class="activity-container" *ngFor="let activity of activitiesBooked" (click)="goToActivity(activity)">
+            <ion-row class="activity-header"><img src = {{activity.val.images[0].file}}/></ion-row>
+            <ion-row class="activity-footer">
+              <ion-item class="line" text-wrap>
+                {{activity.val.title}} <span item-end class="activity-price">${{activity.val.price}}</span>
+              </ion-item>
+              <p>{{activity.val.description}}</p>
+            </ion-row>
+          </div>
+    
+      </ion-row>
+      
+  </ion-row>
+
+  <!-- Guide's Activities -->
   <ion-item class = "heading">
     <h1>My Activities</h1>
   </ion-item>
