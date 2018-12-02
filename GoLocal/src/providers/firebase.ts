@@ -76,8 +76,12 @@ export class FirebaseProvider {
         images: images
     }
     const ID = this.afs.createId();
-    this.afs.doc('/activities/'+ID).set(activity);
-    alert("New activity created!");
+    this.afs.doc('/activities/'+ID).set(activity).then( () => {
+      alert("New activity created!");
+      return ID;
+    }).catch( error => {
+      alert("Was a problem adding the activity. Try again.");
+    });
 
     return ID;
   }
@@ -91,7 +95,11 @@ export class FirebaseProvider {
         guide: guide,
         images: images
     }
-    this.afs.doc('/activities/'+ID).update(activity);
+    this.afs.doc('/activities/'+ID).update(activity).then( () => {
+      alert("Activity details saved!")
+    }).catch( error => {
+      alert("Was a problem saving the activity. Try again.");
+    });
   }
 
   bookActivity(ID,traveller) {

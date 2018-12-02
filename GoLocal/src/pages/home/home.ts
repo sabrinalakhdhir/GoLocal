@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { Slides } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { FirebaseProvider } from '../../providers/firebase';
 import { map } from 'rxjs/operators';
@@ -50,7 +51,7 @@ export class HomePage {
   private activities_cat6 = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
-     public fbProvider: FirebaseProvider, public navParams: NavParams) {
+     public fbProvider: FirebaseProvider, public storage: Storage, public navParams: NavParams) {
     
     this.loggedIn = this.navParams.get('loggedIn');
     // Get list from Firestore
@@ -89,11 +90,12 @@ export class HomePage {
   ionViewDidEnter() {
     console.log("Home entered");
     let loggedIn = this.navParams.get('loggedIn');
-    let name = this.navParams.get('name');
-    if (loggedIn) {
-      this.loggedIn = true;
-      this.logInButton = name + "'s Profile";
-    }
+    this.storage.get('user').then( user => {
+      if (loggedIn) {
+        this.loggedIn = true;
+        this.logInButton = user.val.name + "'s Profile";
+      }
+    })
   }
 
   showCategory(category) {

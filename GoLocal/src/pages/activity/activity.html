@@ -24,16 +24,16 @@
     <!-- Main Content -->
     <ion-col col-7 class="activity-details">
       <ion-row class="image-row">
+        <div class="image-empty" ng2FileDrop *ngIf="imageQueue.length < 1"
+              [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+              (onFileDrop)="dropImage($event)"
+              [uploader]="uploader">
+                Drop your images here<br>or click the button below
+            </div>
         <ion-col col-4 class="image-container" *ngFor="let image of imageQueue">
           <div class = "container" >
           <img class = "activity-image" src="{{image.file}}" />
-            <!-- <div ng2FileDrop
-              [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-              (fileOver)="fileOverBase($event)"
-              [uploader]="uploader"
-              class="drop-zone">
-                Base drop zone
-            </div> -->
+            
           </div>
         </ion-col>
       </ion-row>

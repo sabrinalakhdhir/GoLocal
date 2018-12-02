@@ -69,11 +69,13 @@ export class CreateAccountPage {
           name: this.fullname,
           id: id
         });
+        alert("New guide account created!")
       } else {
         this.navCtrl.setRoot(HomePage, {
           loggedIn: true,
           name: this.fullname,
         });
+        alert("New traveller account created!")
       }
     }, error => {
       console.log(error);

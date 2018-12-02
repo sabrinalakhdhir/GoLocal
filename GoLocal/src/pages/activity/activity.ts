@@ -174,7 +174,6 @@ export class ActivityPage {
     let queue = this.uploader.queue;
     console.log(queue);
 
-
     if (queue.length <= 3) {
       queue.forEach( file => {
         const fileData = file._file;
@@ -199,6 +198,14 @@ export class ActivityPage {
       this.uploader.clearQueue();
     }
   
+  }
+
+  dropImage(event) {
+    console.log("Image dropped");
+    console.log(event);
+    console.log(this.uploader.queue)
+
+    this.onUpload();
   }
 
 }
