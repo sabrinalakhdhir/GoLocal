@@ -50,6 +50,7 @@ page-dashboard {
 
     & .heading {
     	padding: 0px $body-padding;
+        padding-top: 2em;
     }
 
     
@@ -103,8 +104,18 @@ page-dashboard {
     	}
     }
 
+    & .activity-row {
+        padding-top: 20em;
+    }
+
     & .activity-container:hover {
         background: linear-gradient(to bottom, white, gainsboro);
 
+    }
+
+    & .category-row {
+        padding-top: 1em;
+        padding-left:3em;
+        font-size: 18px;
     }
 }
