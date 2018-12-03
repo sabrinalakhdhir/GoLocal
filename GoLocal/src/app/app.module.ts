@@ -26,8 +26,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FirebaseProvider } from '../providers/firebase';
 
 import { FileUploadModule } from 'ng2-file-upload';
-import { ImagePicker } from '@ionic-native/image-picker';
-import { Base64 } from '@ionic-native/base64';
  
 const firebaseConfig = {
     apiKey: "AIzaSyDb7Ifl2bypRHfuIHFEkgKXh4XaO9qnMYI",
@@ -78,8 +76,6 @@ const firebaseConfig = {
     StatusBar,
     SplashScreen,
     FirebaseProvider,
-    ImagePicker,
-    Base64,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })

@@ -1,7 +1,0 @@
-{
-  "name": "GoLocal",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}
