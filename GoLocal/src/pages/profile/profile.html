@@ -17,7 +17,7 @@
     <ion-row>
         <ion-col col-10 text-left><h1>My Profile</h1></ion-col>
         <ion-col col-2>
-          <button ion-button *ngIf="editProfile" (click)="updateProfile()"><ion-icon name="save" float-right></ion-icon>Save Profile</button>
+          <button ion-button round icon-start *ngIf="editProfile" (click)="updateProfile()"><ion-icon name="checkmark"></ion-icon>&nbsp;&nbsp;Save</button>
         </ion-col>
       </ion-row>
   <ion-row>
@@ -28,7 +28,7 @@
           </div>
         </ion-row>
         <ion-row class="upload-images">
-          <span>Upload images: </span>
+          <span>Upload images:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <input type="file" ng2FileSelect [uploader]="uploader" (change)="onUpload()" /><br/>
       </ion-row>
     </ion-col>

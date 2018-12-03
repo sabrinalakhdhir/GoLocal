@@ -32,6 +32,13 @@ page-profile {
             text-align: center;
             font-size: 2em;
         }
+
+        & .upload-images {
+            padding-left: 3em;
+            display: flex;
+            justify-content: center;
+            align-items: centre;
+        }
     }
 
     & .profile-details {
@@ -49,6 +56,7 @@ page-profile {
 
     & .bookings {
         padding: 10px 20px;
+        padding-top: 50px;
         margin: 10px;
         width: 230px;
 
@@ -112,6 +120,10 @@ page-profile {
                 width: 400px;
         }
         }
+    }
+
+    & .no-activities {
+        font-size: 18px;
     }
 
     & .interests {

@@ -11,6 +11,15 @@ page-payment {
         border-radius: 10px;
     }
 
+    & .logo { 
+        position: absolute;
+        width: 150px;
+        height: 50px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        top: -18px;
+    }
+
     & .activity-info {
 
         padding: 20px;
