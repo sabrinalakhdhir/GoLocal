@@ -22,8 +22,8 @@ export class ProfilePage {
 
   private editProfile = false;
 
-  private editName = false;
-  private editBio = false;
+  private editingName = false;
+  private editingBio = false;
 
   private profile = {
     name: "My Full Name",
@@ -59,6 +59,16 @@ export class ProfilePage {
 
   backToHome() {
     this.navCtrl.setRoot(HomePage);
+  }
+
+  // Edit functions
+
+  editName() {
+    this.editingName = true;
+  }
+
+  editDescription() {
+    this.editingBio = true;
   }
 
   // When saving profile

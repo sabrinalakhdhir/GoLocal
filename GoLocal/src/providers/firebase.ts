@@ -51,6 +51,14 @@ export class FirebaseProvider {
     return this.afs.collection('/activities').snapshotChanges();
   }
 
+  getGuideBookedActivities(guide) {
+    return this.afs.collection('activities',
+        ref => ref.where('guide', '==', guide)
+        .where('traveller', '<', "")
+        .where('traveller', '>', ""))
+        .snapshotChanges();
+  }
+
   getGuideActivities(guide) {
     return this.afs.collection('activities',
         ref => ref.where('guide', '==', guide)).snapshotChanges();

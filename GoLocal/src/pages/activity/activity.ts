@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, NavParams } from 'ionic-angular';
+import { NavController, ModalController, NavParams, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { FileUploader } from 'ng2-file-upload';
@@ -14,6 +14,7 @@ import { LoginPage } from '../login/login';
 import { PaymentPage } from '../payment/payment';
 import { isString } from 'ionic-angular/util/util';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { DashboardPage } from '../dashboard/dashboard';
 
 @Component({
   selector: 'page-activity',
@@ -63,7 +64,7 @@ export class ActivityPage {
   private days = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public modalCtrl: ModalController, public storage: Storage, 
+    public modalCtrl: ModalController, public storage: Storage, public alertCtrl: AlertController,
     public fbProvider: FirebaseProvider, private fbApp: FirebaseApp, private afs: AngularFirestore) {
 
       console.log("Constructing activity");
@@ -159,12 +160,43 @@ export class ActivityPage {
       if (ID != null) {
         console.log("Updating activity");
         this.fbProvider.updateActivity(ID,this.activity.title,this.activity.category,this.activity.description,this.activity.price,guide,this.imageQueue);
+        this.navCtrl.pop();
       } else {
         console.log("Adding new activity");
-        this.activity_ID = this.fbProvider.addActivity(this.activity.title,this.activity.category,this.activity.description,this.activity.price,guide,this.imageQueue)
+        this.activity_ID = this.fbProvider.addActivity(this.activity.title,this.activity.category,this.activity.description,this.activity.price,guide,this.imageQueue);
+        this.navCtrl.pop();
       }
     })
+  }
 
+  deleteActivity() {
+    console.log("Delete clicked");
+    this.presentConfirm();
+  }
+
+  presentConfirm() {
+    let alert = this.alertCtrl.create({
+      title: 'Delete Activity',
+      message: 'Are you sure you want to delete this?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            console.log('Delete clicked');
+            this.fbProvider.removeActivity(this.activity_ID);
+            this.navCtrl.setRoot(DashboardPage);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   // Upload images
@@ -196,6 +228,7 @@ export class ActivityPage {
     } else {
       alert("Too many images. Can only upload 3 per activity");
       this.uploader.clearQueue();
+      this.imageQueue = [];
     }
   
   }
@@ -207,5 +240,7 @@ export class ActivityPage {
 
     this.onUpload();
   }
+
+
 
 }
