@@ -39,18 +39,23 @@ page-activity {
         color: grey;
     }
 
+    & .image-row {
+        padding-top: 3em;
+    }
+
     & .image-container {
         height: 250px;
         border: 0px solid black;
         border-radius: 10px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         overflow: hidden;
-        background-color: grey;
+        background-color: lightslategray;
 
         
         & .activity-image {
+              border-radius: 10px;
               width:100%; 
-              height:100%;
+              height:240px;
               margin:auto;
               vertical-align: top;
               display:block;
@@ -93,21 +98,28 @@ page-activity {
         font-size: 36px !important;
     }
 
+    & .head {
+        padding-top: 4em;
+        padding-bottom: 2em;
+    }
+
     & .price {
+        padding-left: 1em; 
         font-size: 36px !important;
     }
 
     & .description {
+        padding-top: 2em;
         font-size: 18px !important;
     }
 
     & .guide-sidebar {
 
         padding: 20px;
-        border: 1px solid black;
-        border-radius: 128px;
+        border: 0px solid black;
+
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        
+
 
 
         & .guide-image {
@@ -144,14 +156,14 @@ page-activity {
         }
 
         & .guide-date{
-            padding-top: 10px;
+            padding-top: 3em;
             display: flex;
             justify-content: center;
             align-items: centre;
         }
 
         & .book-save-delete{
-            padding-top: 20px;
+            padding-top: 8em;
             display: flex;
             justify-content: center;
             align-items: centre;
