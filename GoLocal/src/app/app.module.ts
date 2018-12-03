@@ -17,7 +17,6 @@ import { ProfilePage } from '../pages/profile/profile';
 import { CreateAccountPage } from '../pages/createAccount/createAccount';
 import { LoginPage } from '../pages/login/login';
 import { PaymentPage } from '../pages/payment/payment';
-import { AgreementPage } from '../pages/agreement/agreement';
 
 import { HttpModule } from '@angular/http';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -47,7 +46,6 @@ const firebaseConfig = {
     CreateAccountPage,
     LoginPage,
     PaymentPage,
-    AgreementPage,
     ElasticHeaderDirective 
   ],
   imports: [
@@ -69,7 +67,6 @@ const firebaseConfig = {
     ActivityPage,
     CreateAccountPage,
     LoginPage,
-    AgreementPage,
     PaymentPage
   ],
   providers: [
