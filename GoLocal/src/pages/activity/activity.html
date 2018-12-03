@@ -112,8 +112,9 @@
       <ion-row><div class="guide-name">{{guideData.name}}</div></ion-row>
       <!-- <ion-row><div class="guide-subtitle">{{guideData.subtitle}}</div></ion-row> -->
       <ion-row><div class="guide-contact">{{guideData.contact}}</div></ion-row>
+
+      <p class = "guide-date" *ngIf="!isGuide">Start Date</p>
       <ion-row class = "guide-booking" *ngIf="!isGuide">
-        <p>Start Date</p>
         <ion-select [(ngModel)]="start-month" interface="popover" placeholder="month">
           <ion-option *ngFor="let val of months" value="{{val}}">{{val}}</ion-option>
         </ion-select>
@@ -121,8 +122,9 @@
           <ion-option *ngFor="let val of days" value="{{val}}">{{val}}</ion-option>
         </ion-select>
       </ion-row>
+
+      <p class = "guide-date" *ngIf="!isGuide">End Date</p>
       <ion-row class = "guide-booking" *ngIf="!isGuide">
-        <p>End Date</p>
         <ion-select [(ngModel)]="end-month" interface="popover" placeholder="month">
           <ion-option *ngFor="let val of months" value="{{val}}">{{val}}</ion-option>
         </ion-select>
@@ -131,10 +133,10 @@
         </ion-select>
       </ion-row>
 
-      <ion-row class = "guide-booking">
-        <button ion-button *ngIf="!isGuide" (click)="onBook()">Book Now</button>
-        <button ion-button icon-start *ngIf="isGuide" (click)="saveActivity()"><ion-icon name="checkmark"></ion-icon>Save</button>
-        <button ion-button icon-start *ngIf="isGuide" color="danger" (click)="deleteActivity()"><ion-icon name="close"></ion-icon>Delete</button>
+      <ion-row class = "book-save-delete">
+        <button ion-button round *ngIf="!isGuide" (click)="onBook()">Book Now</button>
+        <button ion-button round icon-start *ngIf="isGuide" (click)="saveActivity()"><ion-icon name="checkmark"></ion-icon>Save</button>
+        <button ion-button round icon-start *ngIf="isGuide" color="danger" (click)="deleteActivity()"><ion-icon name="close"></ion-icon>Delete</button>
       </ion-row>
     </ion-col>
 

@@ -105,8 +105,10 @@ page-activity {
 
         padding: 20px;
         border: 1px solid black;
-        border-radius: 10px;
+        border-radius: 128px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+
 
         & .guide-image {
             margin-left: auto;
@@ -139,12 +141,21 @@ page-activity {
             display: flex;
             justify-content: center;
             align-items: centre;
-
-            & .save{
-                z-index: 100;
-            }
         }
 
+        & .guide-date{
+            padding-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: centre;
+        }
+
+        & .book-save-delete{
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: centre;
+        }
 
     }
 }
