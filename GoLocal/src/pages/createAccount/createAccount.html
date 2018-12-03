@@ -15,13 +15,7 @@
         <ion-option value="1"> Guide</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item>
-      <ion-label>Terms of service: </ion-label> 
-      <ion-select [(ngModel)]="userAgreement">
-        <ion-option value="true"> I agree </ion-option>
-        <ion-option value="false"> I do not agree </ion-option> 
-      </ion-select>
-    </ion-item>
+    <button ion-button (click)= "viewAgreement()">Terms of Service</button>
   </ion-list>
   <ion-list>
     <ion-item>

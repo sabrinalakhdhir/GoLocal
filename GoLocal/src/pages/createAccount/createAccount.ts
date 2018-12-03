@@ -10,6 +10,7 @@ import { ProfilePage } from '../profile/profile';
 import { DashboardPage } from '../dashboard/dashboard';
 
 import { FirebaseProvider } from '../../providers/firebase';
+import { AgreementPage } from '../agreement/agreement';
 
 @Component({
   selector: 'page-createAccount',
@@ -27,7 +28,7 @@ export class CreateAccountPage {
   private username = "";
   private password = "";
   private userType = 0;
-  private userAgreement: Boolean = false;
+ 
 
   private fullname = "";
   private contact = "";
@@ -39,14 +40,7 @@ export class CreateAccountPage {
 
   createAccount() {
     console.log("Clicked create account");
-    console.log(this.username,this.password,this.userType, this.userAgreement);
-    // if the user does not agree to the user agreement, an account cannot be created successfully
-    if (this.userAgreement == false )
-    {
-      alert("Please read & accept the user terms of service in order to create your account.");
-      this.navCtrl.push(HomePage);
-    }
-    else {
+    console.log(this.username,this.password,this.userType);
     let user = this.fbProvider.addUser(this.navCtrl,this.username,this.password,this.userType,this.fullname, this.contact);
     // Convert data to normal object and store in local storage
     // user.snapshotChanges().subscribe( user => {
@@ -69,10 +63,6 @@ export class CreateAccountPage {
         id: id,
         val: value
       })
-      if (this.userAgreement == false) {
-        this.navCtrl.push(HomePage);
-      }
-      else {
       // Route to appropriate page for user type
       if (value['userType'] == 1) {
         this.navCtrl.setRoot(DashboardPage, {
@@ -88,7 +78,7 @@ export class CreateAccountPage {
         });
         alert("New traveller account created!")
       }
-    }}, error => {
+    }, error => {
       console.log(error);
       alert("Could not create new acccount. Try again.");
     });
@@ -99,7 +89,7 @@ export class CreateAccountPage {
     //   alert("Could not log in. Try again.");
     // }
   }
-  }
+  
   
   loginModal() {
     if (logInButton == "My Profile")
@@ -112,4 +102,7 @@ export class CreateAccountPage {
     }
   }
 
+  viewAgreement() { 
+    this.navCtrl.setRoot(AgreementPage);
+  }
 }

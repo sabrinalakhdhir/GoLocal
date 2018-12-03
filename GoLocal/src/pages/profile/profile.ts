@@ -53,12 +53,7 @@ export class ProfilePage {
         actions.forEach(action => {
           console.log(action);
           const value = action.payload.doc.data();
-          const ID = action.payload.doc.data();
-          let activity = {
-            id: ID,
-            val: value
-          }
-          this.activities_user.push(activity)
+          this.activities_user.push(value)
         });
       })
     })

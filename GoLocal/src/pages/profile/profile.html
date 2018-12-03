@@ -74,12 +74,12 @@
               <p class="no-activities" *ngIf="activities_user.length <= 0">No activities currently booked</p>
               <ion-row class="activity-row">
                   <div class="activity-container" *ngFor="let activity of activities_user" (click)="goToActivity(activity)">
-                    <ion-row class="activity-header"><img src = {{activity.val.images[0].file}}/></ion-row>
+                    <ion-row class="activity-header"><img src = {{activity.images[0].file}}/></ion-row>
                     <ion-row class="activity-footer">
                       <ion-item class="line" text-wrap>
-                        {{activity.val.title}} <span item-end class="activity-price">${{activity.val.price}} CAD</span>
+                        {{activity.title}} <span item-end class="activity-price">${{activity.price}} CAD</span>
                       </ion-item>
-                      <p>{{activity.val.description}}</p>
+                      <p>{{activity.description}}</p>
                     </ion-row>
                   </div>
               </ion-row>
