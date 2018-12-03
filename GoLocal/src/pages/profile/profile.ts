@@ -7,6 +7,8 @@ import { FileUploader } from 'ng2-file-upload';
 import { FirebaseProvider } from '../../providers/firebase';
 
 import { HomePage } from '../home/home';
+import { ActivityPage } from '../activity/activity';
+
 
 @Component({
   selector: 'page-profile',
@@ -59,6 +61,16 @@ export class ProfilePage {
 
   backToHome() {
     this.navCtrl.setRoot(HomePage);
+  }
+
+  goToActivity(activity) {
+    console.log("Activity clicked");
+    console.log(activity);
+    this.navCtrl.push(ActivityPage, {
+      loggedIn: true,
+      userType: 0, 
+      activity: activity,
+    });
   }
 
   // Edit functions

@@ -50,13 +50,13 @@ page-dashboard {
 
     & .heading {
     	padding: 0px $body-padding;
-        padding-top: 2em;
+        padding-top: 10px;
     }
 
     
 
     & .activity-row {
-    	padding: 0px $body-padding;
+    	padding: 0px $body-padding !important;
     	/*flex-wrap: nowrap;*/
 
     	& .activity-container {
