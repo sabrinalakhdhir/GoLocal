@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-=======
 {
-  "name": "GoLocal",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular",
-  "app_id": ""
-}
->>>>>>> parent of bccfebc... added terms of service
+    "name": "GoLocal",
+    "integrations": {
+      "cordova": {}
+    },
+    "type": "ionic-angular"
+  }

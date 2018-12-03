@@ -39,9 +39,11 @@ export class ProfilePage {
     // Check if user has stored profile details to display
     this.storage.get('user').then( user => {
       console.log(user);
-      if (user.val.image) {
+      if (user.val.name) {
         this.profile.name = user.val.name;
-        this.profileImage = user.val.image;
+        if (user.val.image) {
+          this.profileImage = user.val.image;
+        }
         if (user.val.bio) {
           this.profile.bio = user.val.bio;
         } else {
